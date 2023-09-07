@@ -1,5 +1,6 @@
 Place Notes here
 
+SENDING DATA FROM PC
 --- Potential dependencies for serial communication
 - infi.devicemanager (https://pypi.org/project/infi.devicemanager/)
     '''
@@ -11,6 +12,16 @@ Place Notes here
         except:
             pass
     '''
-
 - pyusb
 - libusb
+
+RECEIVING DATA ON STM
+- Created project in STM32Cube (https://www.youtube.com/watch?v=7kUo-ekxmCA)
+Settings:
+    - Cleared all pinouts
+    - Set high speed clock under RCC to Crystal/Ceramic Resonator
+    - Enabled aysnch USART 2 with enabled global interrupt and 9600 baud rate
+    - Added circular DMA USART2_RX so mem doesn't fill up
+- I'm using TeraTerm to open the serial connection on COM3.
+- Using built in HAL_UART_Receive function  
+- Reading serial data(https://www.youtube.com/watch?v=7kUo-ekxmCA timestamp 8 min)
