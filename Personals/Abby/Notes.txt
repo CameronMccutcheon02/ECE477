@@ -1,5 +1,3 @@
-Place Notes here
-
 SENDING DATA FROM PC
 --- Potential dependencies for serial communication
 - infi.devicemanager (https://pypi.org/project/infi.devicemanager/)
@@ -25,3 +23,7 @@ Settings:
 - I'm using TeraTerm to open the serial connection on COM3.
 - Using built in HAL_UART_Receive function  
 - Reading serial data(https://www.youtube.com/watch?v=7kUo-ekxmCA timestamp 8 min)
+
+3D PRINTING
+- Design .stl files for score board height extenders
+- Design .stl file for a mount to anchor the camera to the scoreboard
