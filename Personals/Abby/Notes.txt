@@ -1,27 +1,36 @@
-Place Notes here
 
-SENDING DATA FROM PC
---- Potential dependencies for serial communication
+-------------- SENDING DATA FROM PC ------------- 
+- Code contained in serial_write.py 
+
+Potential dependencies for serial communication 
 - infi.devicemanager (https://pypi.org/project/infi.devicemanager/)
-    '''
-    dm = DeviceManager()
-    devices = dm.all_devices
-    for d in devices:
-        try:
-            print(f'{d.friendly_name} : address: {d.address}, bus: {d.bus_number}, location: {d.location}' + "\n")
-        except:
-            pass
-    '''
 - pyusb
 - libusb
 
-RECEIVING DATA ON STM
+-Potential CLI implementation of RealTerm or TeraTerm (https://realterm.sourceforge.io/#Command_Line_Parameters)
+-------------- RECEIVING DATA ON STM -------------- 
 - Created project in STM32Cube (https://www.youtube.com/watch?v=7kUo-ekxmCA)
 Settings:
     - Cleared all pinouts
     - Set high speed clock under RCC to Crystal/Ceramic Resonator
     - Enabled aysnch USART 2 with enabled global interrupt and 9600 baud rate
     - Added circular DMA USART2_RX so mem doesn't fill up
+    - Installed STSW-LINK007 to update ST-Link adapter FW
+
 - I'm using TeraTerm to open the serial connection on COM3.
 - Using built in HAL_UART_Receive function  
 - Reading serial data(https://www.youtube.com/watch?v=7kUo-ekxmCA timestamp 8 min)
+- DMA over receiving UART
+- RealTerm app is used to send serial data to test reading on the STM behalf (serial capture program)
+
+-------------- SENDING DATA ON STM -------------- 
+
+
+-------------- TO-DO -------------- 
+- Read serial data on STM
+- Send data from PC
+- 3D print score board extenders
+- 3D print camera holder
+
+*** send link to 3DWox in Teams
+
