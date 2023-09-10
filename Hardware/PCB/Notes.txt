@@ -1,0 +1,8 @@
+Notes for connection to STLink
+Need to connect SWDIO and SWCLK to the correct pins on the 10-pin JTAG flat connector
+make sure these ones also have a connection to nRST (find a way to connect to both a button and the STLink)
+Pins for SWDIO, SWCLK are PA13 and PA14 respectively
+shouldn't need to use the SWIM pin
+
+Currently reserved pins:
+PA8, PA9, PA10, PA13, PA14, PF0, PF1, PF11

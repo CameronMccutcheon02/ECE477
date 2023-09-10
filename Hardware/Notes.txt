@@ -1,1 +1,3 @@
-Place Notes here
+Parts Needed
+STM32f091RCT6
+JTAG 10 pin flat ribbon connector
