@@ -1,3 +1,16 @@
+-------------- WEEK 4 PROGRESS ------------- 
+- Can write from STM and read from Python 
+- Added code to auto-detect the COM port to be read from in Python
+- DMA research: https://wiki.st.com/stm32mcu/wiki/Getting_started_with_DMA 
+- Can write to STM from PC in serial_write.py
+    - I then write back an ACK containing the data that was read, so writing to the PC the data that was sent from PC
+- Added serial_read to confirm reading is working. Serial_write reads and writes
+
+RealTerm settings:
+-Display: Half duplex 
+-Port: 115200, port 6, change
+-Capture: +CR, +LR, (type data and send ascii)
+
 -------------- SENDING DATA FROM PC ------------- 
 - Code contained in serial_write.py 
 
