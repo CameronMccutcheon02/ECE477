@@ -1,3 +1,9 @@
+#######################################################
+# file: serial_read.py
+# description: used in verifying ser.read() function
+# author: Abby Haluska
+#######################################################
+
 import serial 
 import serial.tools.list_ports
 from infi.devicemanager import DeviceManager

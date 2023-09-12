@@ -11,6 +11,17 @@ RealTerm settings:
 -Port: 115200, port 6, change
 -Capture: +CR, +LR, (type data and send ascii)
 
+To-do: 
+- change from uart5 to uart2 
+- read rx in stm32cube instead of reading from PC, document for pr
+- print extenders
+- comment code
+
+
+
+
+
+
 -------------- SENDING DATA FROM PC ------------- 
 - Code contained in serial_write.py 
 

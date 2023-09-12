@@ -33,9 +33,8 @@ while True:
             x, y, w, h = cv2.boundingRect(contour)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2) # draw bounding 
             print(x, y)
-            ser.write()
     #cv2.imshow("roi", roi)
-    cv2.imshow("Mask", mask)    # show the mask, objects are in white
+    #cv2.imshow("Mask", mask)    # show the mask, objects are in white
     #cv2.imshow("Frame", frame)
 
     key = cv2.waitKey(30)

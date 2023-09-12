@@ -1,8 +1,14 @@
+#######################################################
+# file: serial_comms.py
+# description: used in communicating with stm32
+# author: Abby 
+#######################################################
 import serial 
 import serial.tools.list_ports
 import time
 from infi.devicemanager import DeviceManager
 
+def setup_
 dm = DeviceManager()
 dm.root.rescan()
 devices = dm.all_devices
