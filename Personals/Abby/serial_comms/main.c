@@ -1,4 +1,4 @@
-/* SENDING AND RECEIVING DATA ON STM32 */
+/* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file           : main.c
@@ -44,9 +44,9 @@ UART_HandleTypeDef huart5;
 DMA_HandleTypeDef hdma_usart5_rx;
 
 /* USER CODE BEGIN PV */
-uint8_t txdata[30] = "Testing Now\n\r";
-uint8_t rxdata[6]; // test\n\r is 7 chars
-uint8_t acknowledgement[10] = "Received\n\r";
+uint8_t txdata[30] = "Test STM to PC\n\r";
+uint8_t rxdata[12]; // from pc\n\r is 7 chars
+uint8_t acknowledgement[15] = "Received: \n\r";
 
 /* USER CODE END PV */
 
@@ -64,7 +64,7 @@ static void MX_USART5_UART_Init(void);
 
 /* USER CODE END 0 */
 
-/**
+/**s
   * @brief  The application entry point.
   * @retval int
   */
@@ -95,7 +95,7 @@ int main(void)
   MX_DMA_Init();
   MX_USART5_UART_Init();
   /* USER CODE BEGIN 2 */
-  //HAL_UART_Transmit(&huart5, txdata, sizeof(txdata), 100);		//sends txdata in blocking mode
+  HAL_UART_Transmit(&huart5, txdata, sizeof(txdata), 100);		//sends txdata in blocking mode
   HAL_UART_Receive_DMA(&huart5, rxdata, sizeof(rxdata)); 		//receives amount of data in DMA mode
 
   /* USER CODE END 2 */
@@ -107,7 +107,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	//HAL_UART_Receive(&huart5, rxdata, sizeof(rxdata), 100);	//receive the data on uart5
+	  //HAL_UART_Receive(&huart5, rxdata, sizeof(rxdata), 100);	//receive the data on uart5
   }
   /* USER CODE END 3 */
 }
@@ -223,7 +223,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed 
 {
 	UNUSED(huart);
 	//when exactly 15 char (rx[]) is found, code will enter this loop and read the data
-	HAL_UART_Transmit(&huart5, rxdata, sizeof(rxdata), 100);	//print acknowledgment when data is received
+	//HAL_UART_Transmit(&huart5, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
+	HAL_UART_Transmit(&huart5, rxdata, sizeof(rxdata), 100);	//print the data that was read
+	//HAL_UART_Transmit(&huart5, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
 }
 /* USER CODE END 4 */
 
