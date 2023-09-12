@@ -1,7 +1,7 @@
-Place Notes here
+-------------- SENDING DATA FROM PC ------------- 
+- Code contained in serial_write.py 
 
-SENDING DATA FROM PC
---- Potential dependencies for serial communication
+Potential dependencies for serial communication 
 - infi.devicemanager (https://pypi.org/project/infi.devicemanager/)
 - pyusb
 - libusb
@@ -19,3 +19,25 @@ Settings:
 - I'm using TeraTerm to open the serial connection on COM3.
 - Using built in HAL_UART_Receive function  
 - Reading serial data(https://www.youtube.com/watch?v=7kUo-ekxmCA timestamp 8 min)
+- DMA over receiving UART
+- RealTerm app is used to send serial data to test reading on the STM behalf (serial capture program)
+
+-------------- DIMENSIONS for CAD (mm) -------------- 
+- score board extenders
+54.31 outter diameter
+49.05 inner diameter
+54.47 gole diameter
+43.40 length
+
+- camera 
+38.08 x 38.08 
+16.75 mm to cable
+
+-------------- TO-DO -------------- 
+- Read serial data on STM
+- Send data from PC
+- 3D print score board extenders
+- 3D print camera holder
+
+*** send link to 3DWox in Teams
+
