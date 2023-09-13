@@ -1,26 +1,25 @@
 -------------- WEEK 4 PROGRESS ------------- 
+-------- UPDATES -------- 
 - Can write from STM and read from Python 
 - Added code to auto-detect the COM port to be read from in Python
 - DMA research: https://wiki.st.com/stm32mcu/wiki/Getting_started_with_DMA 
 - Can write to STM from PC in serial_write.py
     - I then write back an ACK containing the data that was read, so writing to the PC the data that was sent from PC
 - Added serial_read to confirm reading is working. Serial_write reads and writes
-- Printed v1 of scoreboard extenders, printing v2 now
+- Printed v1 of scoreboard extenders, tested and modified, printing v2 now
+- Changed from UART5 to UART2
 
+-------- TO-DO -------- 
+- read rx in stm32cube instead of reading from PC, document for pr
+- merge my code w cameron's cube environment
+
+-------- NOTES -------- 
 RealTerm settings:
 -Display: Half duplex 
 -Port: 115200, port 6, change
 -Capture: +CR, +LR, (type data and send ascii)
 
-To-do: 
-- change from uart5 to uart2 
-- read rx in stm32cube instead of reading from PC, document for pr
-
-
-
-
-
-
+-------------- WEEK 3 PROGRESS ------------- 
 -------------- SENDING DATA FROM PC ------------- 
 - Code contained in serial_write.py 
 
@@ -56,11 +55,5 @@ Settings:
 38.08 x 38.08 
 16.75 mm to cable
 
--------------- TO-DO -------------- 
-- Read serial data on STM
-- Send data from PC
-- 3D print score board extenders
-- 3D print camera holder
 
-*** send link to 3DWox in Teams
 
