@@ -5,6 +5,7 @@
 - Can write to STM from PC in serial_write.py
     - I then write back an ACK containing the data that was read, so writing to the PC the data that was sent from PC
 - Added serial_read to confirm reading is working. Serial_write reads and writes
+- Printed v1 of scoreboard extenders, printing v2 now
 
 RealTerm settings:
 -Display: Half duplex 
@@ -14,8 +15,6 @@ RealTerm settings:
 To-do: 
 - change from uart5 to uart2 
 - read rx in stm32cube instead of reading from PC, document for pr
-- print extenders
-- comment code
 
 
 

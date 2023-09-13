@@ -4,19 +4,10 @@ import time
 import serial 
 import serial.tools.list_ports
 from infi.devicemanager import DeviceManager
+from serial_comms.serial_comms import setup_serialobject, serial_write, serial_read
 
 # SETTING UP SERIAL PORT OBJECT TO SEND DATA
-dm = DeviceManager()
-dm.root.rescan()
-devices = dm.all_devices
-for device in devices:
-    if "USB Serial Port" in device.description:
-        str = device.__str__()
-        port = str.split('(', 1)[1].split(')')[0]
-ser = serial.Serial("COM6", 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False) #, 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
-ser.close()
-ser.open()
-ser.flush()
+ser = setup_serialobject()
 
 # COMPUTER VISION AND OBJECT DETECTION
 video = '//nas01.itap.purdue.edu/puhome/My Documents/477/ECE477 fr/ECE477/Personals/Abby/puck_detection/modified/airhockey.mp4'
@@ -55,9 +46,9 @@ while(True):
         #print(f'Velocity: {velocity}')
         #print(f'Prediction: {prediction}')
         #print(f'Actual: {centroid}\n\n')
-        ser.write(f'\n{prediction}'.encode())
+        serial_write(ser, prediction)
         print(f'Prediction: {prediction}')
-        print(ser.readline())   # read ACK from STM
+        print(serial_read(ser))
 
         # Compute velocity and prediction based off of previous frame
         velocity = (centroid[0] - old_centroid[0], centroid[1] - old_centroid[1])
