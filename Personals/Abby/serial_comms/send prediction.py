@@ -48,7 +48,7 @@ while(True):
         #print(f'Actual: {centroid}\n\n')
 
         serial_write(ser, prediction)
-        print(f'Prediction: {prediction}')
+        #print(f'Prediction: {prediction}')
         print(serial_read(ser))
 
         # Compute velocity and prediction based off of previous frame
