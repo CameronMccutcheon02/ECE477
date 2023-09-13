@@ -1,8 +1,25 @@
 import cv2
 import numpy as np
 import time
+import serial 
+import serial.tools.list_ports
+from infi.devicemanager import DeviceManager
 
-video = 'airhockey.mp4'
+# SETTING UP SERIAL PORT OBJECT TO SEND DATA
+dm = DeviceManager()
+dm.root.rescan()
+devices = dm.all_devices
+for device in devices:
+    if "USB Serial Port" in device.description:
+        str = device.__str__()
+        port = str.split('(', 1)[1].split(')')[0]
+ser = serial.Serial("COM6", 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False) #, 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
+ser.close()
+ser.open()
+ser.flush()
+
+# COMPUTER VISION AND OBJECT DETECTION
+video = '//nas01.itap.purdue.edu/puhome/My Documents/477/ECE477 fr/ECE477/Personals/Abby/puck_detection/modified/airhockey.mp4'
 webcam = 0
 vid = cv2.VideoCapture(video)
 
@@ -35,22 +52,23 @@ while(True):
         moments = cv2.moments(largest_contour)
         centroid = (int(moments["m10"] / moments["m00"]), int(moments["m01"] / moments["m00"]))
 
-        print(f'Velocity: {velocity}')
+        #print(f'Velocity: {velocity}')
+        #print(f'Prediction: {prediction}')
+        #print(f'Actual: {centroid}\n\n')
+        ser.write(f'\n{prediction}'.encode())
         print(f'Prediction: {prediction}')
-        print(f'Actual: {centroid}\n\n')
-            
+        print(ser.readline())   # read ACK from STM
+
         # Compute velocity and prediction based off of previous frame
         velocity = (centroid[0] - old_centroid[0], centroid[1] - old_centroid[1])
         prediction = (centroid[0] + velocity[0], centroid[1] + velocity[1]) 
         old_centroid = centroid
-
-
-
+        
     else:
         vid = cv2.VideoCapture('airhockey.mp4')
         continue
 
-    cv2.imshow('Frame', frame)
+    #cv2.imshow('Frame', frame)
     time.sleep(1)
 
     if cv2.waitKey(1) == 27:
