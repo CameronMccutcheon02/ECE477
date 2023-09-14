@@ -16,11 +16,6 @@ To-do:
 - change from uart5 to uart2 
 - read rx in stm32cube instead of reading from PC, document for pr
 
-
-
-
-
-
 -------------- SENDING DATA FROM PC ------------- 
 - Code contained in serial_write.py 
 
