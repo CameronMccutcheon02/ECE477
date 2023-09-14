@@ -19,8 +19,14 @@ RealTerm settings:
 -Port: 115200, port 6, change
 -Capture: +CR, +LR, (type data and send ascii)
 
-DMA and Latencies:
-
+Updated PSDRs: 
+PSDR #1 (Hardware): An ability to use a microcontroller to control the XY directions of a gantry system using PWM and 2 motors. 
+PSDR #2 (Hardware): An ability to interface with an IC to establish communication and send data between a microcontroller and a PC via UART.
+PSDR #3 (Hardware): An ability to interface a seven-segment display scoreboard with shift registers. 
+ 
+Stretch goals:
+An ability to produce sound using speakers in the scoreboard system.
+An ability to change the speed of the robot via a button. 
 
 -------------- WEEK 3 PROGRESS ------------- 
 -------------- SENDING DATA FROM PC ------------- 
