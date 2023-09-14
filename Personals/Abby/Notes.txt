@@ -63,3 +63,12 @@ Settings:
 - camera 
 38.08 x 38.08 
 16.75 mm to cable
+
+-------------- TO-DO -------------- 
+- Read serial data on STM
+- Send data from PC
+- 3D print score board extenders
+- 3D print camera holder
+
+*** send link to 3DWox in Teams
+

@@ -4,13 +4,13 @@ import time
 import serial 
 import serial.tools.list_ports
 from infi.devicemanager import DeviceManager
-from serial_comms.serial_comms import setup_serialobject, serial_write, serial_read
+from serial_comms import setup_serialobject, serial_read, serial_write
 
 # SETTING UP SERIAL PORT OBJECT TO SEND DATA
 ser = setup_serialobject()
 
 # COMPUTER VISION AND OBJECT DETECTION
-video = '//nas01.itap.purdue.edu/puhome/My Documents/477/ECE477 fr/ECE477/Personals/Abby/puck_detection/modified/airhockey.mp4'
+video = '//nas01.itap.purdue.edu/puhome/My Documents/477/ECE477 fr/ECE477/Personals/Abby/serial_comms/airhockey.mp4'
 webcam = 0
 vid = cv2.VideoCapture(video)
 
@@ -46,8 +46,9 @@ while(True):
         #print(f'Velocity: {velocity}')
         #print(f'Prediction: {prediction}')
         #print(f'Actual: {centroid}\n\n')
+
         serial_write(ser, prediction)
-        print(f'Prediction: {prediction}')
+        #print(f'Prediction: {prediction}')
         print(serial_read(ser))
 
         # Compute velocity and prediction based off of previous frame

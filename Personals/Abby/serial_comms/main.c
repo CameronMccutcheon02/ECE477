@@ -40,8 +40,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart5;
-DMA_HandleTypeDef hdma_usart5_rx;
+UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 uint8_t txdata[30] = "Test STM to PC\n\r";
@@ -54,7 +54,7 @@ uint8_t acknowledgement[15] = "Received: \n\r";
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
-static void MX_USART5_UART_Init(void);
+static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -64,7 +64,7 @@ static void MX_USART5_UART_Init(void);
 
 /* USER CODE END 0 */
 
-/**s
+/**
   * @brief  The application entry point.
   * @retval int
   */
@@ -93,10 +93,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_USART5_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Transmit(&huart5, txdata, sizeof(txdata), 100);		//sends txdata in blocking mode
-  HAL_UART_Receive_DMA(&huart5, rxdata, sizeof(rxdata)); 		//receives amount of data in DMA mode
+  //HAL_UART_Transmit(&huart2, txdata, sizeof(txdata), 100);		//sends txdata in blocking mode
+  HAL_UART_Receive_DMA(&huart2, rxdata, sizeof(rxdata)); 		//receives amount of data in DMA mode
 
   /* USER CODE END 2 */
 
@@ -107,7 +107,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  //HAL_UART_Receive(&huart5, rxdata, sizeof(rxdata), 100);	//receive the data on uart5
+	  //HAL_UART_Receive(&huart2, rxdata, sizeof(rxdata), 100);	//receive the data on uart5
   }
   /* USER CODE END 3 */
 }
@@ -120,6 +120,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -145,40 +146,46 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-}
-
-/**
-  * @brief USART5 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USART5_UART_Init(void)
-{
-
-  /* USER CODE BEGIN USART5_Init 0 */
-
-  /* USER CODE END USART5_Init 0 */
-
-  /* USER CODE BEGIN USART5_Init 1 */
-
-  /* USER CODE END USART5_Init 1 */
-  huart5.Instance = USART5;
-  huart5.Init.BaudRate = 115200;
-  huart5.Init.WordLength = UART_WORDLENGTH_8B;
-  huart5.Init.StopBits = UART_STOPBITS_1;
-  huart5.Init.Parity = UART_PARITY_NONE;
-  huart5.Init.Mode = UART_MODE_TX_RX;
-  huart5.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart5.Init.OverSampling = UART_OVERSAMPLING_16;
-  huart5.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart5.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-  if (HAL_UART_Init(&huart5) != HAL_OK)
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2;
+  PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN USART5_Init 2 */
+}
 
-  /* USER CODE END USART5_Init 2 */
+/**
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART2_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART2_Init 0 */
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+
+  /* USER CODE END USART2_Init 2 */
 
 }
 
@@ -211,8 +218,6 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
@@ -223,9 +228,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed 
 {
 	UNUSED(huart);
 	//when exactly 15 char (rx[]) is found, code will enter this loop and read the data
-	//HAL_UART_Transmit(&huart5, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
-	HAL_UART_Transmit(&huart5, rxdata, sizeof(rxdata), 100);	//print the data that was read
-	//HAL_UART_Transmit(&huart5, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
+	//HAL_UART_Transmit(&huart2, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
+	HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);	//print the data that was read
+	//HAL_UART_Transmit(&huart2, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
 }
 /* USER CODE END 4 */
 
