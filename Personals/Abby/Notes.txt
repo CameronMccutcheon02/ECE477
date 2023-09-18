@@ -1,3 +1,20 @@
+-------------- WEEK 5 PROGRESS ------------- 
+-------- UPDATES -------- 
+- 
+
+-------- TO-DO -------- 
+- Interface with 7-segment display using shift regs
+    - Mon: get shift regs and breadboard the 7-segment with the 74HC
+    - Tues: Prototype with arduino and 74HC595, get 1 7-segment incrementing
+    - Wed: Prototype with STM32 and Cube IDE
+- Do we want the middle 7-seg to display time or mode?
+- CAD and print puck funnel
+
+-------- NOTES -------- 
+- Interfacing with 7-segment: https://www.youtube.com/watch?v=_74fpCfT_tA
+- Shift regs and 7-segment: https://www.youtube.com/watch?v=QI1IJLB42G8 
+- Schematic: https://ece362-purdue.github.io/f2022-public-labs/lab-03/lab_03.html 
+
 -------------- WEEK 4 PROGRESS ------------- 
 -------- UPDATES -------- 
 - Can write from STM and read from Python 
