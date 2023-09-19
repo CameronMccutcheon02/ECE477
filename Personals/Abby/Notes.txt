@@ -1,18 +1,29 @@
 -------------- WEEK 5 PROGRESS ------------- 
 -------- UPDATES -------- 
-- printed puck shoot to funnel the puck
+- Have a countdown from 10 working on 362 7-segment with an Arduino Nano
+    - Had to use sink driver and transistors to accomodate for current flow
+- The funnel was too large to print. Redesigning
 
 -------- TO-DO -------- 
 - Interface with 7-segment display using shift regs
     - Tues: Prototype with arduino and 74HC595, get 1 7-segment incrementing
-        - Use CMOS transistors + 8 bit shift registers
     - Wed: Prototype with STM32 and Cube IDE
+        - Have the 7-segment light up when a message is received from Python?
+        - Swap 362 7-segment with the table's 7 segment
+
 - Do we want the middle 7-seg to display time or mode?
+- CAD and print puck funnel
 
 -------- NOTES -------- 
 - Interfacing with 7-segment: https://www.youtube.com/watch?v=_74fpCfT_tA
 - Shift regs and 7-segment: https://www.youtube.com/watch?v=QI1IJLB42G8 
 - Schematic: https://ece362-purdue.github.io/f2022-public-labs/lab-03/lab_03.html 
+- Prototyping with arduino  
+    - TLC sink driver to sink the current flow so it can be used with micro: https://www.ti.com/lit/ds/symlink/tlc59211.pdf?ts=1695063006948&ref_url=https%253A%252F%252Fwww.google.com%252F
+    - PN2907A transistor for each anode of each digit of the display will proide at least 200 mA of current bc the micro cannot supply enough current for the display
+    - CD74HC595E shift regs - https://www.ti.com/lit/ds/symlink/cd74hc595.pdf?HQS=dis-mous-null-mousermode-dsf-pf-null-wwe&ts=1695051021412&ref_url=https%253A%252F%252Fwww.ti.com%252Fgeneral%252Fdocs%252Fsuppproductinfo.tsp%253FdistId%253D26%2526gotoUrl%253Dhttps%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Fcd74hc595 
+    - Got parts from EE shop. Breadboard was partly fried so it took time to replicate circuit on a different board. 
+    - Am able to countdown from 10 using nano. Planning o have digits show whenever data is received from PC
 
 -------------- WEEK 4 PROGRESS ------------- 
 -------- UPDATES -------- 
