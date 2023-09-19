@@ -2,7 +2,7 @@
 -------- UPDATES -------- 
 - Have a countdown from 10 working on 362 7-segment with an Arduino Nano
     - Had to use sink driver and transistors to accomodate for current flow
-- The funnel was too large to print. Redesigning
+- Printed 2 ramps that will be done by tomorrow morning
 
 -------- TO-DO -------- 
 - Interface with 7-segment display using shift regs
