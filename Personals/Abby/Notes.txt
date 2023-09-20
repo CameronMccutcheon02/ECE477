@@ -6,17 +6,21 @@
 - Designed and printed 2 ramps that will be done by Wed Morning
 - Assisted Cameron in disassembling the table borders
 - Rewrote project description 
-- 
+
+---- WED
+- Interfaced w 7-segment and Cameron's code
+- Rewrite PSDR 4:
+- Submit procurement form for break beam sensors
+- Meeting with Andjey: progress more with the motors and gantry system. we need a mechanical design showing
+- An ability to keep score with a microcontroller by counting the number of times an interrupt is triggered by a puck passing through an infrared laser beam.
+
 
 -------- TO-DO -------- 
 - Interface with 7-segment display using shift regs
-    - Tues: Prototype with arduino and 74HC595, get 1 7-segment incrementing
-        - Rewrite project description
-        - Complete procurement forms
-    - Wed: Prototype with STM32 and Cube IDE
+    - Wed: Prototype with arduino and the DM13A
         - Have the 7-segment light up when a message is received from Python?
         - Swap 362 7-segment with the table's 7 segment
-
+        - https://hobbycomponents.com/ics/826-dm13a-constant-current-sink-driver
 - Do we want the middle 7-seg to display time or mode?
 - CAD and print puck funnel
 
