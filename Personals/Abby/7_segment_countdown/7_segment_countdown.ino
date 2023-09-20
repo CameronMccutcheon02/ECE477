@@ -14,8 +14,12 @@ void setup()
 }
 
 void loop(){
-  all_on();
-}
+  digitalWrite(10, HIGH);
+  digitalWrite(11, HIGH);
+  digitalWrite(12, HIGH);
+  countdown();
+  //all_on();
+} 
 
 void countdown() {
   digitalWrite(2, HIGH);
@@ -63,7 +67,7 @@ void countdown() {
   delay(500);
   clear();
   delay(500);
-  exit(0);
+  //exit(0);
 }
 
 void all_on(){

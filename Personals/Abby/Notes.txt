@@ -4,15 +4,12 @@
 - I have a countdown from 10 working on 1 362 7-segment with an Arduino Nano
     - Had to use sink driver and transistors to accomodate for current flow
 - Designed and printed 2 ramps that will be done by Wed Morning
+- Printed Cameron's motor mount design
 - Assisted Cameron in disassembling the table borders
 - Rewrote project description 
-- 
 
 -------- TO-DO -------- 
 - Interface with 7-segment display using shift regs
-    - Tues: Prototype with arduino and 74HC595, get 1 7-segment incrementing
-        - Rewrite project description
-        - Complete procurement forms
     - Wed: Prototype with STM32 and Cube IDE
         - Have the 7-segment light up when a message is received from Python?
         - Swap 362 7-segment with the table's 7 segment
