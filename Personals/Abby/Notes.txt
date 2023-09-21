@@ -13,7 +13,8 @@
     - it seems dm13a might only support common cathode, but i am looking into it. https://forum.arduino.cc/t/need-help-with-dm13a-16-bit-shift-register-ic/580565
         - an alternative chip might be okay
     - https://github.com/michaelkamprath/ShiftRegisterLEDMatrixLib
-- Updated PSDR #4
+- Updated PSDR #4 on website
+- Placed an order through business office for break beams
 
 -------- TO-DO -------- 
 - Interface with 7-segment display using shift regs
