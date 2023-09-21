@@ -1,25 +1,26 @@
 -------------- WEEK 5 PROGRESS ------------- 
 -------- UPDATES -------- 
----- TUES
 - I have a countdown from 10 working on 1 362 7-segment with an Arduino Nano
     - Had to use sink driver and transistors to accomodate for current flow
+    - https://ece362-purdue.github.io/f2022-public-labs/lab-03/lab_03.html
 - Designed and printed 2 ramps that will be done by Wed Morning
 - Printed Cameron's motor mount design
 - Assisted Cameron in disassembling the table borders
 - Rewrote project description 
-- 
+- Printer motor mounts and updated ramp shoot and scoreboard extenders
+- Looked into dm13a
+    - pinout: https://pdf1.alldatasheet.com/datasheet-pdf/view/825460/SITI/DM13A-E.html
+    - it seems dm13a might only support common cathode, but i am looking into it. https://forum.arduino.cc/t/need-help-with-dm13a-16-bit-shift-register-ic/580565
+        - an alternative chip might be okay
+    - https://github.com/michaelkamprath/ShiftRegisterLEDMatrixLib
+- Updated PSDR #4
 
 -------- TO-DO -------- 
 - Interface with 7-segment display using shift regs
-    - Tues: Prototype with arduino and 74HC595, get 1 7-segment incrementing
-        - Rewrite project description
-        - Complete procurement forms
-    - Wed: Prototype with STM32 and Cube IDE
-        - Have the 7-segment light up when a message is received from Python?
-        - Swap 362 7-segment with the table's 7 segment
-        - https://hobbycomponents.com/ics/826-dm13a-constant-current-sink-driver
-- Do we want the middle 7-seg to display time or mode?
-- CAD and print puck funnel
+    - thurs: 
+        - use power supply to see if arduino wasn't supplying 595a circuit enough current
+        - test w dm13a and cathode and anode displays
+        - test w transistors/driver sink circuit?
 
 -------- NOTES -------- 
 - Interfacing with 7-segment: https://www.youtube.com/watch?v=_74fpCfT_tA
