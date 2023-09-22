@@ -3,7 +3,7 @@ import numpy as np
 import time
 import math
 
-video = 'Personals/Joey/airhockey.mp4'
+video = 'airhockey.mp4'
 camera = 1
 vid = cv2.VideoCapture(video)
 
@@ -22,6 +22,8 @@ class Line:
         y = point[1]
 
         self.b = -1 * slope * x + y
+        self.point1 = point
+        self.point2 = (point[0] + 1, int(point[1] + self.m))
 
     def findY(self, x):
         return self.m * x + self.b
@@ -34,18 +36,44 @@ class Line:
             x = 999
         y = int(self.findY(x))
         return (x, y)
+    def reflection(self, wall):
+        
+        intersection = self.intersect(wall)
+        newSlope = -1 * self.m
+        newLine = Line(newSlope, intersection)
+                
+        return newLine
     
 
-def findBounce(velocity, puck): #predicts location where puck will strike a wall
+
+
+
+def findBounce(velocity, puck, puckLine, step): #predicts location where puck will strike a wall and bounce towards
+
+    if step == 3:
+        return
+
+    step += 1
+
     if velocity[0] >= 0 and velocity[1] >= 0: 
         #bottom and right
         bottomIntersect = puckLine.intersect(bottom) #find intersection with bottom of table
         rightIntersect = puckLine.intersect(right) #find intersection with right side of table
 
         if math.sqrt((puck[0] - bottomIntersect[0])**2 + (puck[1] - bottomIntersect[1])**2) < math.sqrt((puck[0] - rightIntersect[0])**2 + (puck[1] - rightIntersect[1])**2): #compare distance to bottom and distance to right
-            cv2.circle(roi, bottomIntersect, radius=15, color=(0,0,255), thickness=-1) 
+            cv2.circle(frame, bottomIntersect, radius=15, color=(0,0,255), thickness=-1) #bottom
+            bounce = puckLine.reflection(bottom)
+            newVelocity = (velocity[0], -1 * velocity[1])
+            findBounce(newVelocity, puck, bounce, step)
+            
+
         else:
-            cv2.circle(roi, rightIntersect, radius=15, color=(0,0,255), thickness=-1) 
+            cv2.circle(frame, rightIntersect, radius=15, color=(0,0,255), thickness=-1) #right
+            bounce = puckLine.reflection(right)
+            newVelocity = (-1 * velocity[0], velocity[1])
+            findBounce(newVelocity, puck, bounce, step)
+            
+
         
     
     elif velocity[0] < 0 and velocity[1] >= 0:
@@ -54,9 +82,19 @@ def findBounce(velocity, puck): #predicts location where puck will strike a wall
         leftIntersect = puckLine.intersect(left)
 
         if math.sqrt((puck[0] - bottomIntersect[0])**2 + (puck[1] - bottomIntersect[1])**2) < math.sqrt((puck[0] - leftIntersect[0])**2 + (puck[1] - leftIntersect[1])**2):
-            cv2.circle(roi, bottomIntersect, radius=15, color=(0,0,255), thickness=-1) 
+            cv2.circle(frame, bottomIntersect, radius=15, color=(0,0,255), thickness=-1) #bottom
+            bounce = puckLine.reflection(bottom)
+            newVelocity = (velocity[0], -1 * velocity[1])
+            findBounce(newVelocity, puck, bounce, step)
+            
+
         else:
-            cv2.circle(roi, leftIntersect, radius=15, color=(0,0,255), thickness=-1) 
+            cv2.circle(frame, leftIntersect, radius=15, color=(0,0,255), thickness=-1) #left
+            bounce = puckLine.reflection(left)
+            newVelocity = (-1 * velocity[0], velocity[1])
+            findBounce(newVelocity, puck, bounce, step)
+            
+
 
     elif velocity[0] >= 0 and velocity[1] < 0:
         #top and right
@@ -64,9 +102,19 @@ def findBounce(velocity, puck): #predicts location where puck will strike a wall
         rightIntersect = puckLine.intersect(right)
 
         if math.sqrt((puck[0] - topIntersect[0])**2 + (puck[1] - topIntersect[1])**2) < math.sqrt((puck[0] - rightIntersect[0])**2 + (puck[1] - rightIntersect[1])**2):
-            cv2.circle(roi, topIntersect, radius=15, color=(0,0,255), thickness=-1) 
+            cv2.circle(frame, topIntersect, radius=15, color=(0,0,255), thickness=-1) #top
+            bounce = puckLine.reflection(top)
+            newVelocity = (velocity[0], -1 * velocity[1])
+            findBounce(newVelocity, puck, bounce, step)
+            
+
         else:
-            cv2.circle(roi, rightIntersect, radius=15, color=(0,0,255), thickness=-1) 
+            cv2.circle(frame, rightIntersect, radius=15, color=(0,0,255), thickness=-1) #right
+            bounce = puckLine.reflection(right)
+            newVelocity = (-1 * velocity[0], velocity[1])
+            findBounce(newVelocity, puck, bounce, step)
+            
+
     
     elif velocity[0] < 0 and velocity[1] < 0:
         #top and left
@@ -74,9 +122,21 @@ def findBounce(velocity, puck): #predicts location where puck will strike a wall
         leftIntersect = puckLine.intersect(left)
 
         if math.sqrt((puck[0] - topIntersect[0])**2 + (puck[1] - topIntersect[1])**2) < math.sqrt((puck[0] - leftIntersect[0])**2 + (puck[1] - leftIntersect[1])**2):
-            cv2.circle(roi, topIntersect, radius=15, color=(0,0,255), thickness=-1) 
+            cv2.circle(frame, topIntersect, radius=15, color=(0,0,255), thickness=-1) #top
+            bounce = puckLine.reflection(top)
+            newVelocity = (velocity[0], -1 * velocity[1])
+            findBounce(newVelocity, puck, bounce, step)
+            
+
         else:
-            cv2.circle(roi, leftIntersect, radius=15, color=(0,0,255), thickness=-1) 
+            cv2.circle(frame, leftIntersect, radius=15, color=(0,0,255), thickness=-1) #left
+            bounce = puckLine.reflection(left)
+            newVelocity = (-1 * velocity[0], velocity[1])
+            findBounce(newVelocity, puck, bounce, step)
+            
+
+
+    
         
 
 #defines corners of table (will do this automatically with real camera)
@@ -85,17 +145,19 @@ bottom = Line(0, (0, 625))
 left = Line(999, (170, 0))
 right = Line(999, (1075, 0))
 
+#ASSUME RIGHT SIDE IS ROBOT SIDE
+scoreLine = Line(999, (1075, 0))
         
 
 while(True):
     ret, frame = vid.read()
-    roi = frame
+    
 
     
     if ret == True:
         
         # Convert frame to HSV spectrum, mask using desired color range
-        hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv, low_red, high_red)
         #cv2.imshow("color", mask)
     
@@ -111,27 +173,27 @@ while(True):
             # Find largest contour, draw bounding box, find center
             largest_contour = max(contours, key=cv2.contourArea)
             x, y, w, h = cv2.boundingRect(largest_contour)
-            cv2.rectangle(roi, (x, y), (x+w, y+h), (0, 255, 0), 3) #rectangle around puck
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3) #rectangle around puck
 
-            cv2.circle(roi, (1075, 625), radius=5, color=(255,0,0), thickness=-1) #bottom right
-            cv2.circle(roi, (1075, 90), radius=5, color=(255,0,0), thickness=-1) #top right
-            cv2.circle(roi, (170, 90), radius=5, color=(255,0,0), thickness=-1) #top left
-            cv2.circle(roi, (170, 625), radius=5, color=(255,0,0), thickness=-1) #bottom left
+            cv2.circle(frame, (1075, 625), radius=5, color=(255,0,0), thickness=-1) #bottom right
+            cv2.circle(frame, (1075, 90), radius=5, color=(255,0,0), thickness=-1) #top right
+            cv2.circle(frame, (170, 90), radius=5, color=(255,0,0), thickness=-1) #top left
+            cv2.circle(frame, (170, 625), radius=5, color=(255,0,0), thickness=-1) #bottom left
 
             moments = cv2.moments(largest_contour)
             if moments["m00"] != 0:
                 centroid = (int(moments["m10"] / moments["m00"]), int(moments["m01"] / moments["m00"]))
     
-            print(f'Velocity: {velocity}')
-            print(f'Prediction: {prediction}')
-            print(f'Actual: {centroid}\n\n')
+            # print(f'Velocity: {velocity}')
+            # print(f'Prediction: {prediction}')
+            # print(f'Actual: {centroid}\n\n')
                 
             # Compute velocity and prediction based off of previous frame
             velocity = (centroid[0] - old_centroid[0], centroid[1] - old_centroid[1])
             prediction = (centroid[0] + velocity[0], centroid[1] + velocity[1]) 
             old_centroid = centroid
 
-            cv2.line(roi, centroid, prediction, (0,255,0), 2)
+            cv2.line(frame, centroid, prediction, (0,255,0), 2)
 
 
             if velocity[0] != 0:
@@ -141,13 +203,17 @@ while(True):
 
             puckLine = Line(slope, centroid) #defines line on which puck is traveling
 
-            findBounce(velocity, centroid)
+            
+            findBounce(velocity, centroid, puckLine, 0)
+            
+
+            cv2.line(frame, (1075, 90), (1075, 625), (0, 255, 0), 2) #goal line on robot side
 
 
     count += 1
 
     cv2.imshow('Frame', frame)
-    #time.sleep(0.4)
+    time.sleep(1)
 
     if cv2.waitKey(1) == 27:
         break
