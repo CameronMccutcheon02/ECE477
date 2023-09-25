@@ -1,3 +1,16 @@
+-------------- WEEK 6 PROGRESS ------------- 
+-------- UPDATES --------
+
+-------- NOTES --------
+- 
+- interfacing IR sensors w STM: https://ruturajn.hashnode.dev/interfacing-ir-sensor-with-the-stm32f407-discovery-kit-using-external-interrupt
+
+-------- PLAN --------
+- Tues: write script to configure IR sensors and toggle LED when sensors detect smthn
+- Wed: use sink driver + transistors w table's 7-segment, write STM script to interface 7 seg
+- Thurs: 7-segment
+- Fri: software formalization doc
+
 -------------- WEEK 5 PROGRESS ------------- 
 -------- UPDATES -------- 
 - I have a countdown from 10 working on 1 362 7-segment with an Arduino Nano
@@ -14,11 +27,8 @@
         - an alternative chip might be okay
     - https://github.com/michaelkamprath/ShiftRegisterLEDMatrixLib
     - 595 pinout: https://www.ti.com/lit/ds/symlink/sn74hc595.pdf?ts=1695281292760&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252Fko-kr%252FSN74HC595%253Futm_source%253Dgoogle%2526utm_medium%253Dcpc%2526utm_campaign%253Dasc-int-null-44700044498855648_prodfolderdynamic-cpc-pf-google-kr_int%2526utm_content%253Dprodfolddynamic%2526ds_k%253DDYNAMIC%2BSEARCH%2BADS%2526DCM%253Dyes%2526gclid%253DEAIaIQobChMIjbah8Za7gQMV6doWBR0ViwdyEAAYASAAEgKsAfD_BwE%2526gclsrc%253Daw.ds
-    
 - Updated PSDR #4 on website
-- Will we need to
-//- Placed an order through business office for break beams
-
+- Placed an order through business office for break beams
 
 -------- NOTES -------- 
 - Interfacing with 7-segment: https://www.youtube.com/watch?v=_74fpCfT_tA
