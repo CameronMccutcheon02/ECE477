@@ -4,9 +4,10 @@
 #define DM13A_LAT 7
 #define DM13A_DAI 8
 
+byte segment_select = 0x00;
+
 void setup() {
   // put your setup code here, to run once:
-
   pinMode(DM13A_LAT, OUTPUT);
   pinMode(DM13A_CLK, OUTPUT);
   pinMode(DM13A_DAI, OUTPUT);

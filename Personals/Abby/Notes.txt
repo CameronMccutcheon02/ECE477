@@ -13,15 +13,12 @@
     - it seems dm13a might only support common cathode, but i am looking into it. https://forum.arduino.cc/t/need-help-with-dm13a-16-bit-shift-register-ic/580565
         - an alternative chip might be okay
     - https://github.com/michaelkamprath/ShiftRegisterLEDMatrixLib
+    - 595 pinout: https://www.ti.com/lit/ds/symlink/sn74hc595.pdf?ts=1695281292760&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252Fko-kr%252FSN74HC595%253Futm_source%253Dgoogle%2526utm_medium%253Dcpc%2526utm_campaign%253Dasc-int-null-44700044498855648_prodfolderdynamic-cpc-pf-google-kr_int%2526utm_content%253Dprodfolddynamic%2526ds_k%253DDYNAMIC%2BSEARCH%2BADS%2526DCM%253Dyes%2526gclid%253DEAIaIQobChMIjbah8Za7gQMV6doWBR0ViwdyEAAYASAAEgKsAfD_BwE%2526gclsrc%253Daw.ds
+    
 - Updated PSDR #4 on website
-- Placed an order through business office for break beams
+- Will we need to
+//- Placed an order through business office for break beams
 
--------- TO-DO -------- 
-- Interface with 7-segment display using shift regs
-    - thurs: 
-        - use power supply to see if arduino wasn't supplying 595a circuit enough current
-        - test w dm13a and cathode and anode displays
-        - test w transistors/driver sink circuit?
 
 -------- NOTES -------- 
 - Interfacing with 7-segment: https://www.youtube.com/watch?v=_74fpCfT_tA
