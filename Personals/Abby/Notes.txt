@@ -1,28 +1,34 @@
+-------------- WEEK 6 PROGRESS ------------- 
+-------- UPDATES --------
+- 
+
+-------- NOTES --------
+- 
+- interfacing IR sensors w STM: https://ruturajn.hashnode.dev/interfacing-ir-sensor-with-the-stm32f407-discovery-kit-using-external-interrupt
+
+-------- PLAN --------
+- Wed: 7-segment, camera print, resin mount print, update website with datasheets!!!!!
+- Thurs: 7-segment
+- Fri: software formalization doc, IR sensors ?
+
 -------------- WEEK 5 PROGRESS ------------- 
 -------- UPDATES -------- 
----- TUES
 - I have a countdown from 10 working on 1 362 7-segment with an Arduino Nano
     - Had to use sink driver and transistors to accomodate for current flow
+    - https://ece362-purdue.github.io/f2022-public-labs/lab-03/lab_03.html
 - Designed and printed 2 ramps that will be done by Wed Morning
+- Printed Cameron's motor mount design
 - Assisted Cameron in disassembling the table borders
 - Rewrote project description 
-
----- WED
-- Interfaced w 7-segment and Cameron's code
-- Rewrite PSDR 4:
-- Submit procurement form for break beam sensors
-- Meeting with Andjey: progress more with the motors and gantry system. we need a mechanical design showing
-- An ability to keep score with a microcontroller by counting the number of times an interrupt is triggered by a puck passing through an infrared laser beam.
-
-
--------- TO-DO -------- 
-- Interface with 7-segment display using shift regs
-    - Wed: Prototype with arduino and the DM13A
-        - Have the 7-segment light up when a message is received from Python?
-        - Swap 362 7-segment with the table's 7 segment
-        - https://hobbycomponents.com/ics/826-dm13a-constant-current-sink-driver
-- Do we want the middle 7-seg to display time or mode?
-- CAD and print puck funnel
+- Printer motor mounts and updated ramp shoot and scoreboard extenders
+- Looked into dm13a
+    - pinout: https://pdf1.alldatasheet.com/datasheet-pdf/view/825460/SITI/DM13A-E.html
+    - it seems dm13a might only support common cathode, but i am looking into it. https://forum.arduino.cc/t/need-help-with-dm13a-16-bit-shift-register-ic/580565
+        - an alternative chip might be okay
+    - https://github.com/michaelkamprath/ShiftRegisterLEDMatrixLib
+    - 595 pinout: https://www.ti.com/lit/ds/symlink/sn74hc595.pdf?ts=1695281292760&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252Fko-kr%252FSN74HC595%253Futm_source%253Dgoogle%2526utm_medium%253Dcpc%2526utm_campaign%253Dasc-int-null-44700044498855648_prodfolderdynamic-cpc-pf-google-kr_int%2526utm_content%253Dprodfolddynamic%2526ds_k%253DDYNAMIC%2BSEARCH%2BADS%2526DCM%253Dyes%2526gclid%253DEAIaIQobChMIjbah8Za7gQMV6doWBR0ViwdyEAAYASAAEgKsAfD_BwE%2526gclsrc%253Daw.ds
+- Updated PSDR #4 on website
+- Placed an order through business office for break beams
 
 -------- NOTES -------- 
 - Interfacing with 7-segment: https://www.youtube.com/watch?v=_74fpCfT_tA
