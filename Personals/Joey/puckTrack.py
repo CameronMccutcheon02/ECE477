@@ -14,6 +14,13 @@ velocity = (0, 0)
 prediction = (0, 0)
 centroid = (0, 0)
 count = 0
+global previousIntersections
+previousIntersections = []
+
+
+historyFrames = 3 #adjust for number of frames in intersection history
+bounceNum = 3 #adjust for number of predicted bounces
+historyTolerance = 30 #adjust for tolerance in intersection decision
 
 class Line:
     def __init__(self, slope, point):
@@ -44,26 +51,46 @@ class Line:
                 
         return newLine
     
+
+def listAverage(intersections):
+    newList = [i[1] for i in intersections]
+    average = sum(newList) / len(newList)
+    #print(f'Average: {int(average)}  Last Point: {intersections[len(intersections)-1]}')
+    if abs(average - intersections[len(intersections)-1][1]) < historyTolerance:
+        return True
+    else:
+        return False
+
 def checkPotential(puck, velocity, path, threshold, top, bottom): #checks if puck will cross some danger line
     if velocity[0] > 0:
         intersection = path.intersect(threshold)
+
         if intersection[1] > top and intersection[1] < bottom:      
-            cv2.line(frame, puck, intersection, (0, 0, 255), 2)      
+            
             return intersection
 
 
 
 def findBounce(velocity, puck, puckLine, step): #predicts location where puck will strike a wall and bounce towards
 
-
-    if step == 3: #increase to see more collisions
+    if step == bounceNum: #increase to see more collisions
         return
-
+    
     step += 1
 
     dangerPoint = checkPotential(puck, velocity, puckLine, Line(999, (990, 0)), 90, 625)
     if dangerPoint is not None:
-        cv2.circle(frame, dangerPoint, radius=15, color=(0, 255, 0), thickness=-1)
+
+        previousIntersections.append(dangerPoint)
+
+        if len(previousIntersections) == historyFrames+1:
+            previousIntersections.pop(0)
+
+        if listAverage(previousIntersections):
+            cv2.line(frame, puck, dangerPoint, (0, 0, 255), 2) 
+            cv2.circle(frame, dangerPoint, radius=15, color=(0, 255, 0), thickness=-1)
+            print(f'Move motor to: {dangerPoint}')
+
 
     if velocity[0] >= 0 and velocity[1] >= 0: 
         #bottom and right
@@ -83,9 +110,7 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(newVelocity, rightIntersect, bounce, step)
             
-
-        
-    
+  
     elif velocity[0] < 0 and velocity[1] >= 0:
         #bottom and left
         bottomIntersect = puckLine.intersect(bottom)
@@ -105,7 +130,6 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
             findBounce(newVelocity, leftIntersect, bounce, step)
             
 
-
     elif velocity[0] >= 0 and velocity[1] < 0:
         #top and right
         topIntersect = puckLine.intersect(top)
@@ -124,8 +148,7 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(newVelocity, rightIntersect, bounce, step)
             
-
-    
+  
     elif velocity[0] < 0 and velocity[1] < 0:
         #top and left
         topIntersect = puckLine.intersect(top)
@@ -144,10 +167,7 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(newVelocity, leftIntersect, bounce, step)
             
-
-
-    
-        
+      
 
 #defines corners of table (will do this automatically with real camera)
 top = Line(0, (0, 90))
@@ -212,14 +232,13 @@ while(True):
                 slope = 999
 
             puckLine = Line(slope, centroid) #defines line on which puck is traveling
-
-            
             findBounce(velocity, centroid, puckLine, 0)
             
     count += 1
 
     cv2.imshow('Frame', frame)
-    time.sleep(0.5)
+    time.sleep(0.04)
+    #time.sleep(0.5)
 
     if cv2.waitKey(1) == 27:
         break
