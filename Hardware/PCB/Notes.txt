@@ -6,3 +6,5 @@ shouldn't need to use the SWIM pin
 
 Currently reserved pins:
 PA8, PA9, PA10, PA13, PA14, PF0, PF1, PF11
+
+JTAG connector footprint is a Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical
