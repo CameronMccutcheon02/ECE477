@@ -1,10 +1,17 @@
 -------------- WEEK 6 PROGRESS ------------- 
 -------- UPDATES --------
+- IR sensors working in STM32Cube and blinking LED / sending serial output whenever beam is broken
+    - need to improve by implementing interrupts, currently polling. using GPIOA
+    - using HAL
 - IR sensors are in and i tested and verified with an Arduino script -> they work up to 8 in. away which is max what we would need
 
 -------- NOTES --------
 - got 2 TLC59211 sink drivers from EE shop to replace DM13A https://www.ti.com/lit/ds/symlink/tlc59211.pdf?ts=1695918250430&ref_url=https%253A%252F%252Fwww.google.com%252F
 - interfacing IR sensors w STM: https://ruturajn.hashnode.dev/interfacing-ir-sensor-with-the-stm32f407-discovery-kit-using-external-interrupt
+- stm32f091 data sheet: https://www.st.com/en/microcontrollers-microprocessors/stm32f091rc.html
+- dependencies: HAL
+TM
+STM32Fxxx HAL
 
 -------- PLAN --------
 - Wed: 7-segment, camera print, resin mount print, update website with datasheets!!!!!

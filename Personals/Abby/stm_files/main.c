@@ -47,6 +47,7 @@ DMA_HandleTypeDef hdma_usart2_rx;
 uint8_t txdata[30] = "Test STM to PC\n\r";
 uint8_t rxdata[12]; // from pc\n\r is 7 chars
 uint8_t acknowledgement[15] = "Received: \n\r";
+uint8_t IR_beam[14];
 
 /* USER CODE END PV */
 
@@ -95,8 +96,6 @@ int main(void)
   MX_DMA_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  //HAL_UART_Transmit(&huart2, txdata, sizeof(txdata), 100);		//sends txdata in blocking mode
-  HAL_UART_Receive_DMA(&huart2, rxdata, sizeof(rxdata)); 		//receives amount of data in DMA mode
 
   /* USER CODE END 2 */
 
@@ -105,9 +104,19 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1))
+	  {
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+		  HAL_UART_Transmit(&huart2, "not broken\n\r", sizeof(IR_beam), 100);
+		  HAL_Delay(1000);
+	  }
+	  else
+	  {
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+		  HAL_UART_Transmit(&huart2, "broken\n\r", sizeof(IR_beam), 100);
+		  HAL_Delay(1000);
+	  }
     /* USER CODE BEGIN 3 */
-	  //HAL_UART_Receive(&huart2, rxdata, sizeof(rxdata), 100);	//receive the data on uart5
   }
   /* USER CODE END 3 */
 }
@@ -212,6 +221,7 @@ static void MX_DMA_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 /* USER CODE BEGIN MX_GPIO_Init_1 */
 /* USER CODE END MX_GPIO_Init_1 */
 
@@ -219,19 +229,28 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PA0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed callback
-{
-	UNUSED(huart);
-	//when exactly 15 char (rx[]) is found, code will enter this loop and read the data
-	//HAL_UART_Transmit(&huart2, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
-	HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);	//print the data that was read
-	//HAL_UART_Transmit(&huart2, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
-}
+
 /* USER CODE END 4 */
 
 /**
