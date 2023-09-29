@@ -18,9 +18,9 @@ global previousIntersections
 previousIntersections = []
 
 
-historyFrames = 3 #adjust for number of frames in intersection history
+historyFrames = 2 #adjust for number of frames in intersection history
 bounceNum = 3 #adjust for number of predicted bounces
-historyTolerance = 30 #adjust for tolerance in intersection decision
+historyTolerance = 50 #adjust for tolerance in intersection decision (smaller for less detections)
 
 class Line:
     def __init__(self, slope, point):
@@ -86,9 +86,12 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
         if len(previousIntersections) == historyFrames+1:
             previousIntersections.pop(0)
 
+        temp = [i[1] for i in previousIntersections]
+        average = (990, int(sum(temp) / len(temp)))
+
         if listAverage(previousIntersections):
-            cv2.line(frame, puck, dangerPoint, (0, 0, 255), 2) 
-            cv2.circle(frame, dangerPoint, radius=15, color=(0, 255, 0), thickness=-1)
+            cv2.line(frame, puck, average, (0, 0, 255), 2) 
+            cv2.circle(frame, average, radius=15, color=(0, 255, 0), thickness=-1)
             print(f'Move motor to: {dangerPoint}')
 
 
@@ -98,14 +101,14 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
         rightIntersect = puckLine.intersect(right) #find intersection with right side of table
 
         if math.sqrt((puck[0] - bottomIntersect[0])**2 + (puck[1] - bottomIntersect[1])**2) < math.sqrt((puck[0] - rightIntersect[0])**2 + (puck[1] - rightIntersect[1])**2): #compare distance to bottom and distance to right
-            cv2.circle(frame, bottomIntersect, radius=10, color=(0,0,255), thickness=-1) #bottom
+            #cv2.circle(frame, bottomIntersect, radius=10, color=(0,0,255), thickness=-1) #bottom
             bounce = puckLine.reflection(bottom)
             newVelocity = (velocity[0], -1 * velocity[1])
             findBounce(newVelocity, bottomIntersect, bounce, step)
             
 
         else:
-            cv2.circle(frame, rightIntersect, radius=10, color=(0,0,255), thickness=-1) #right
+            #cv2.circle(frame, rightIntersect, radius=10, color=(0,0,255), thickness=-1) #right
             bounce = puckLine.reflection(right)
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(newVelocity, rightIntersect, bounce, step)
@@ -117,14 +120,14 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
         leftIntersect = puckLine.intersect(left)
 
         if math.sqrt((puck[0] - bottomIntersect[0])**2 + (puck[1] - bottomIntersect[1])**2) < math.sqrt((puck[0] - leftIntersect[0])**2 + (puck[1] - leftIntersect[1])**2):
-            cv2.circle(frame, bottomIntersect, radius=10, color=(0,0,255), thickness=-1) #bottom
+            #cv2.circle(frame, bottomIntersect, radius=10, color=(0,0,255), thickness=-1) #bottom
             bounce = puckLine.reflection(bottom)
             newVelocity = (velocity[0], -1 * velocity[1])
             findBounce(newVelocity, bottomIntersect, bounce, step)
             
 
         else:
-            cv2.circle(frame, leftIntersect, radius=10, color=(0,0,255), thickness=-1) #left
+            #cv2.circle(frame, leftIntersect, radius=10, color=(0,0,255), thickness=-1) #left
             bounce = puckLine.reflection(left)
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(newVelocity, leftIntersect, bounce, step)
@@ -136,14 +139,14 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
         rightIntersect = puckLine.intersect(right)
 
         if math.sqrt((puck[0] - topIntersect[0])**2 + (puck[1] - topIntersect[1])**2) < math.sqrt((puck[0] - rightIntersect[0])**2 + (puck[1] - rightIntersect[1])**2):
-            cv2.circle(frame, topIntersect, radius=10, color=(0,0,255), thickness=-1) #top
+            #cv2.circle(frame, topIntersect, radius=10, color=(0,0,255), thickness=-1) #top
             bounce = puckLine.reflection(top)
             newVelocity = (velocity[0], -1 * velocity[1])
             findBounce(newVelocity, topIntersect, bounce, step)
             
 
         else:
-            cv2.circle(frame, rightIntersect, radius=10, color=(0,0,255), thickness=-1) #right
+            #cv2.circle(frame, rightIntersect, radius=10, color=(0,0,255), thickness=-1) #right
             bounce = puckLine.reflection(right)
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(newVelocity, rightIntersect, bounce, step)
@@ -155,14 +158,14 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
         leftIntersect = puckLine.intersect(left)
 
         if math.sqrt((puck[0] - topIntersect[0])**2 + (puck[1] - topIntersect[1])**2) < math.sqrt((puck[0] - leftIntersect[0])**2 + (puck[1] - leftIntersect[1])**2):
-            cv2.circle(frame, topIntersect, radius=10, color=(0,0,255), thickness=-1) #top
+            #cv2.circle(frame, topIntersect, radius=10, color=(0,0,255), thickness=-1) #top
             bounce = puckLine.reflection(top)
             newVelocity = (velocity[0], -1 * velocity[1])
             findBounce(newVelocity, topIntersect, bounce, step)
             
 
         else:
-            cv2.circle(frame, leftIntersect, radius=10, color=(0,0,255), thickness=-1) #left
+            #cv2.circle(frame, leftIntersect, radius=10, color=(0,0,255), thickness=-1) #left
             bounce = puckLine.reflection(left)
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(newVelocity, leftIntersect, bounce, step)
@@ -237,8 +240,8 @@ while(True):
     count += 1
 
     cv2.imshow('Frame', frame)
-    time.sleep(0.04)
-    #time.sleep(0.5)
+    #time.sleep(0.04)
+    time.sleep(0.5)
 
     if cv2.waitKey(1) == 27:
         break
