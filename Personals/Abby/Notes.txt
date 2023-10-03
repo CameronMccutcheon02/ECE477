@@ -1,20 +1,40 @@
+-------------- WEEK 7 PROGRESS ------------- 
+-------- UPDATES --------
+
+-------- NOTES --------
+- IR interfacing    
+    - using timer1, EXTI4_15_IRQ
+    - wrote callback function to increment player 1 and 2 scores whenever IR triggered (HAL_GPIO_EXTI_Callback)
+        - GPIO configs: GPIO pins 10 and 11 for player 1 and 2 score interrupts, init on falling (GPIO_MODE_IT_FALLING), had to use pull_up resistors otherwise doesn't work. 
+        - referenced in stm32f0xx_hal_gpio.c in HAL_GPIO_EXTI_IRQHandler, which has gpio pin as argument and clears the interupt before calling the callback function. this handler is clld in EXTI4_15_IRQHandler in stm32f0xx_it.c
+        - 
+-------- PLAN --------
+- Tues: 
+    - change from polling to interrupts with IR sensors
+    - determine which pins needed for what
+    - print mf camera mount fr this time
+    - update puck shoot design
+    - ask dr.walter to approve project proposal
+
 -------------- WEEK 6 PROGRESS ------------- 
 -------- UPDATES --------
 - IR sensors working in STM32Cube and blinking LED / sending serial output whenever beam is broken
     - need to improve by implementing interrupts, currently polling. using GPIOA
     - using HAL
 - IR sensors are in and i tested and verified with an Arduino script -> they work up to 8 in. away which is max what we would need
-- tried using TLC59211 sink drivers with 7seg but didn't make a difference. verified that the right signals are going into DM13A, but the output isn't working. ordering a similar IC to substitute
-    - may have to be okay with dim LEDs and using just the 595s
-- submitted another procurement formalization
-- ordered MAX6971ANG+ off of Mouser w my own fundssss -> should hopefully replace DM13. might as well try but if it doesnt work we will have to do transistor network. :()
-- 
 
 -------- NOTES --------
 - got 2 TLC59211 sink drivers from EE shop to replace DM13A https://www.ti.com/lit/ds/symlink/tlc59211.pdf?ts=1695918250430&ref_url=https%253A%252F%252Fwww.google.com%252F
 - interfacing IR sensors w STM: https://ruturajn.hashnode.dev/interfacing-ir-sensor-with-the-stm32f407-discovery-kit-using-external-interrupt
 - stm32f091 data sheet: https://www.st.com/en/microcontrollers-microprocessors/stm32f091rc.html
-- dependencies: HAL, TM, STM32Fxxx HAL
+- dependencies: HAL
+TM
+STM32Fxxx HAL
+
+-------- PLAN --------
+- Wed: 7-segment, camera print, resin mount print, update website with datasheets!!!!!
+- Thurs: 7-segment
+- Fri: software formalization doc, IR sensors ?
 
 -------------- WEEK 5 PROGRESS ------------- 
 -------- UPDATES -------- 
