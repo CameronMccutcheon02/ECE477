@@ -47,11 +47,14 @@ DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 uint8_t txdata[30] = "Test STM to PC\n\r";
-uint8_t rxdata[7]; // from pc\n\r is 7 chars
-uint8_t acknowledgement[15] = "Score: \n\r";
+uint8_t rxdata[10]; // from pc\n\r is 7 chars
+uint8_t acknowledgement[15] = "Received: \n\r";
 uint8_t IR_beam[14];
 uint8_t score_read[10];
-uint8_t score;
+uint8_t player1score;
+uint8_t player2score;
+uint8_t player1scoreack[30] = "Player 1 Score: \n\r";
+uint8_t player2scoreack[30] = "Player 2 Score: \n\r";
 
 /* USER CODE END PV */
 
@@ -104,9 +107,12 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-  score = 0;
+  player1score = 0;
+  player2score = 0;
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  HAL_UART_Receive_DMA(&huart2, rxdata, sizeof(rxdata));
+
   while (1)
   {
     /* USER CODE END WHILE */
@@ -272,10 +278,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PA0 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -305,18 +318,18 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	UNUSED(GPIO_Pin);
 	if(GPIO_Pin == GPIO_PIN_11)
 	{
-		score = score + 1;
-		sprintf(score_read, "%d\n\r", score);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
-		HAL_UART_Transmit(&huart2, acknowledgement, sizeof(acknowledgement), 100);
+		player1score = player1score + 1;
+		sprintf(score_read, "%d\n\r", player1score);
+		//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+		HAL_UART_Transmit(&huart2, player1scoreack, sizeof(player1scoreack), 100);
 		HAL_UART_Transmit(&huart2, score_read, sizeof(score_read), 100);
 	}
 	else if(GPIO_Pin == GPIO_PIN_10)
 	{
-		score = score + 1;
-		sprintf(score_read, "%d\n\r", score);
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
-		HAL_UART_Transmit(&huart2, acknowledgement, sizeof(acknowledgement), 100);
+		player2score = player2score + 1;
+		sprintf(score_read, "%d\n\r", player2score);
+		//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+		HAL_UART_Transmit(&huart2, player2scoreack, sizeof(player2scoreack), 100);
 		HAL_UART_Transmit(&huart2, score_read, sizeof(score_read), 100);
 	}
 }
@@ -324,7 +337,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed callback
 {
 	UNUSED(huart);
-	HAL_UART_Transmit(&huart2, acknowledgement, sizeof(acknowledgement), 100);	//print the data that was read
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+
+	HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);	//print the data that was read
+
 	//clear interrupt to continue in while loop if needed
 }
 /**
