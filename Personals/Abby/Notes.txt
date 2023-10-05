@@ -3,6 +3,7 @@
 - ir interfacing done 
 - serial comms prototyped w LEDs
     - 0b11111111 << 4
+    - PC interfacing with stm is working great -> i can use teraterm to write a value and STM reads, parses, and uses it to control output LEDs. when i do the same thring with pyserial, it is quite delayed and i think the data is being sent separately. overall working good but need to debug pyserial issue
 
 -------- NOTES --------
 - IR interfacing    

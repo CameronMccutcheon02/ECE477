@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include <stdio.h>
+#include <string.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -47,7 +48,7 @@ DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 uint8_t txdata[30] = "Test STM to PC\n\r";
-uint8_t rxdata[10]; // from pc\n\r is 7 chars
+uint8_t rxdata[9];
 uint8_t acknowledgement[15] = "Received: \n\r";
 uint8_t IR_beam[14];
 uint8_t score_read[10];
@@ -55,6 +56,7 @@ uint8_t player1score;
 uint8_t player2score;
 uint8_t player1scoreack[30] = "Player 1 Score: \n\r";
 uint8_t player2scoreack[30] = "Player 2 Score: \n\r";
+int rx_read;
 
 /* USER CODE END PV */
 
@@ -313,6 +315,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	UNUSED(GPIO_Pin);
@@ -320,7 +323,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	{
 		player1score = player1score + 1;
 		sprintf(score_read, "%d\n\r", player1score);
-		//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
 		HAL_UART_Transmit(&huart2, player1scoreack, sizeof(player1scoreack), 100);
 		HAL_UART_Transmit(&huart2, score_read, sizeof(score_read), 100);
 	}
@@ -328,22 +330,32 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	{
 		player2score = player2score + 1;
 		sprintf(score_read, "%d\n\r", player2score);
-		//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
 		HAL_UART_Transmit(&huart2, player2scoreack, sizeof(player2scoreack), 100);
 		HAL_UART_Transmit(&huart2, score_read, sizeof(score_read), 100);
 	}
+
 }
+
+void remove_all_chars(char* str, char c)
+{
+    char *pr = str, *pw = str;
+    while (*pr) {
+        *pw = *pr++;
+        pw += (*pw != c);
+    }
+    *pw = '\0';
+}
+
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed callback
 {
 	UNUSED(huart);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
-
-	HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);	//print the data that was read
-
-	//clear interrupt to continue in while loop if needed
+	HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);
+	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11), RESET);
+	remove_all_chars(rxdata, 'b');
+	remove_all_chars(rxdata, '\'');
+	sscanf(rxdata, "%d", &rx_read);
+ 	GPIOA -> BSRR = (uint32_t)((uint16_t)(rx_read));
 }
 /**
   * @brief GPIO Initialization Function

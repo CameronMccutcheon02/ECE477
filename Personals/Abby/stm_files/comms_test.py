@@ -18,4 +18,3 @@ while(True):
     data_to_send = data_to_send.encode()
     print(data_to_send)
     ser.write(data_to_send)
-    time.sleep(.5)
