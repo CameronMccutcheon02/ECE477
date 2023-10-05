@@ -1,5 +1,8 @@
 -------------- WEEK 7 PROGRESS ------------- 
 -------- UPDATES --------
+- ir interfacing done 
+- serial comms prototyped w LEDs
+    - 0b11111111 << 4
 
 -------- NOTES --------
 - IR interfacing    
@@ -8,23 +11,25 @@
         - print to terminal over usart
         - GPIO configs: GPIO pins 10 and 11 for player 1 and 2 score interrupts, init on falling (GPIO_MODE_IT_FALLING), had to use pull_up resistors otherwise doesn't work. 
         - referenced in stm32f0xx_hal_gpio.c in HAL_GPIO_EXTI_IRQHandler, which has gpio pin as argument and clears the interupt before calling the callback function. this handler is clld in EXTI4_15_IRQHandler in stm32f0xx_it.c
-        - 
--------- PLAN --------
-- Tues: 
-    - change from polling to interrupts with IR sensors
-    - ask dr.walter to approve honr project proposal
-- Wednesday:
-    - 7 segment interfacing with new component or transistors
-    - camera mount 
-- Thursday:
-    - Send packets and use packets to output 8 LEDs
+- serial comms
+    - i can send an 8-bit packet from PC/python to control the corresponding LEDs 
+        - converting a byte packet to an int was a bit complicated in C, so i accept an 8-bit packet in python, convert it to a string of the integer version, and then use sscanf() in C to convert a string to an int
+        - i had to ensure that the same size string is always being sent
 
+-------- PLAN --------
 * Determine which pins for what 
 * Look over PCB design
 * Update funnel design so puck doesn't get stuck
+* update website
+- To-do:
+    - Website updates
+        - add all assignments / Reports (update if grade warrents)
+        - add all data sheets
+        - add PCB
+        - presentation slides 
+    - print camera mount
+    - redesign puck funnels
 
-- Fri: 
-    - update website with data sheets
 -------------- WEEK 6 PROGRESS ------------- 
 -------- UPDATES --------
 - IR sensors working in STM32Cube and blinking LED / sending serial output whenever beam is broken
