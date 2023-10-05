@@ -3,5 +3,10 @@ from infi.devicemanager import DeviceManager
 from serial_comms import setup_serialobject, serial_read, serial_write
 
 ser = setup_serialobject()
-serial_write(ser, b'01010101')
-print(serial_read(ser))
+ser.close()
+ser.open()
+ser.flush()
+serial_write(ser, "11111111")
+
+while(True):
+    print(serial_read(ser))

@@ -1,7 +1,8 @@
 -------------- WEEK 7 PROGRESS ------------- 
 -------- UPDATES --------
 - ir interfacing done 
-- 
+- serial comms prototyped w LEDs
+    - 0b11111111 << 4
 
 -------- NOTES --------
 - IR interfacing    
@@ -11,6 +12,19 @@
         - GPIO configs: GPIO pins 10 and 11 for player 1 and 2 score interrupts, init on falling (GPIO_MODE_IT_FALLING), had to use pull_up resistors otherwise doesn't work. 
         - referenced in stm32f0xx_hal_gpio.c in HAL_GPIO_EXTI_IRQHandler, which has gpio pin as argument and clears the interupt before calling the callback function. this handler is clld in EXTI4_15_IRQHandler in stm32f0xx_it.c
         
+- serial comms  
+    - formatting is annoying. i tried sending a string of an integer to the stm and that worked great, only when the integer is the same amount of characters as specified by rx[] in main
+
+- To-do:
+    - Website updates
+        - add all assignments / Reports (update if grade warrents)
+        - add all data sheets
+        - add PCB
+        - presentation slides 
+    - print camera mount
+    - redesign puck funnels
+
+
 -------- PLAN --------
 - Tues: 
     - change from polling to interrupts with IR sensors
