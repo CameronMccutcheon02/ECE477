@@ -1,19 +1,14 @@
 -------------- WEEK 7 PROGRESS ------------- 
 -------- UPDATES --------
-- IR sensor interfacing done using timer and interrupts
 
 -------- NOTES --------
 - IR interfacing    
     - using timer1, EXTI4_15_IRQ
     - wrote callback function to increment player 1 and 2 scores whenever IR triggered (HAL_GPIO_EXTI_Callback)
+        - print to terminal over usart
         - GPIO configs: GPIO pins 10 and 11 for player 1 and 2 score interrupts, init on falling (GPIO_MODE_IT_FALLING), had to use pull_up resistors otherwise doesn't work. 
         - referenced in stm32f0xx_hal_gpio.c in HAL_GPIO_EXTI_IRQHandler, which has gpio pin as argument and clears the interupt before calling the callback function. this handler is clld in EXTI4_15_IRQHandler in stm32f0xx_it.c
-        - update score1 and score2 variables
-- 7 segment interfacing
-    - 
-- Serial comms using 8 LEDs
-    - 
-
+        - 
 -------- PLAN --------
 - Tues: 
     - change from polling to interrupts with IR sensors
@@ -28,6 +23,8 @@
 * Look over PCB design
 * Update funnel design so puck doesn't get stuck
 
+- Fri: 
+    - update website with data sheets
 -------------- WEEK 6 PROGRESS ------------- 
 -------- UPDATES --------
 - IR sensors working in STM32Cube and blinking LED / sending serial output whenever beam is broken

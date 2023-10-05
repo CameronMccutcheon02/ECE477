@@ -5,10 +5,10 @@ import math
 
 video = 'airhockey.mp4'
 camera = 1
-vid = cv2.VideoCapture(video)
+vid = cv2.VideoCapture(0)
 
-low_red = np.array([0, 150, 150])
-high_red = np.array([150, 255, 200])
+low_green = np.array([60, 40, 80])
+high_green = np.array([100, 255, 255])
 old_centroid = (0, 0)
 velocity = (0, 0)
 prediction = (0, 0)
@@ -196,7 +196,7 @@ while(True):
         
         # Convert frame to HSV spectrum, mask using desired color range
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        mask = cv2.inRange(hsv, low_red, high_red)
+        mask = cv2.inRange(hsv, low_green, high_green)
         #cv2.imshow("color", mask)
     
         # Make all non-white colors black, find contours
@@ -211,6 +211,11 @@ while(True):
             # Find largest contour, draw bounding box, find center
             largest_contour = max(contours, key=cv2.contourArea)
             x, y, w, h = cv2.boundingRect(largest_contour)
+
+            # for cnt in contours:
+            #     x, y, w, h = cv2.boundingRect(cnt)
+            #     cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3)
+
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3) #rectangle around puck
 
             cv2.circle(frame, (1075, 625), radius=5, color=(255,0,0), thickness=-1) #bottom right
@@ -240,13 +245,13 @@ while(True):
                 slope = 999
 
             puckLine = Line(slope, centroid) #defines line on which puck is traveling
-            findBounce(velocity, centroid, puckLine, 0)
+            #findBounce(velocity, centroid, puckLine, 0)
             
     count += 1
 
     cv2.imshow('Frame', frame)
     #time.sleep(0.04)
-    time.sleep(0.5)
+    #time.sleep(0.5)
 
     if cv2.waitKey(1) == 27:
         break
