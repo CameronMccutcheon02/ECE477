@@ -50,6 +50,7 @@ DMA_HandleTypeDef hdma_usart2_rx;
 uint8_t txdata[30] = "Test STM to PC\n\r";
 uint8_t rxdata[9];
 uint8_t acknowledgement[15] = "Received: \n\r";
+uint8_t ack[5] = "acl\n\r";
 uint8_t IR_beam[14];
 uint8_t score_read[10];
 uint8_t player1score;

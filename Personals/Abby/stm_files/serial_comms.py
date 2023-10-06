@@ -18,7 +18,7 @@ def setup_serialobject():
             port = str.split('(', 1)[1].split(')')[0]
             print(port)
 
-    ser = serial.Serial("COM6", 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False) #, 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
+    ser = serial.Serial(port="COM6", baudrate=115200, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE, parity=None, rtscts=False, dsrdtr=False) # xonxoff=False, rtscts=False, dsrdtr=False) #, 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
     ser.close()
     ser.open()
     ser.flush()
