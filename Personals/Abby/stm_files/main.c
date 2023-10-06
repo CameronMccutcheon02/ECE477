@@ -50,7 +50,7 @@ DMA_HandleTypeDef hdma_usart2_rx;
 uint8_t txdata[30] = "Test STM to PC\n\r";
 uint8_t rxdata[9];
 uint8_t acknowledgement[15] = "Received: \n\r";
-uint8_t ack[5] = "acl\n\r";
+uint8_t ack[5] = "ack\n\r";
 uint8_t IR_beam[14];
 uint8_t score_read[10];
 uint8_t player1score;
@@ -337,14 +337,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 }
 
-void remove_all_chars(char* str, char c)
+void remove_char(char* str, char c)
 {
-    char *pr = str, *pw = str;
-    while (*pr) {
-        *pw = *pr++;
-        pw += (*pw != c);
+    char *str1 = str, *str2 = str;
+    while (*str1) {
+        *str2 = *str1++;
+        str2 += (*str2 != c);
     }
-    *pw = '\0';
+    *str2 = '\0';
 }
 
 /* USER CODE BEGIN 4 */
@@ -353,8 +353,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed 
 	UNUSED(huart);
 	HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11), RESET);
-	remove_all_chars(rxdata, 'b');
-	remove_all_chars(rxdata, '\'');
+	remove_char(rxdata, 'b');
+	remove_char(rxdata, '\'');
 	sscanf(rxdata, "%d", &rx_read);
  	GPIOA -> BSRR = (uint32_t)((uint16_t)(rx_read));
 }
