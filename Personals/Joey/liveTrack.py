@@ -3,12 +3,12 @@ import numpy as np
 import time
 import math
 
-video = 'airhockey.mp4'
+video = 'greenhockey.mp4'
 camera = 1
 vid = cv2.VideoCapture(0)
 
-low_green = np.array([60, 40, 80])
-high_green = np.array([100, 255, 255])
+low_green = np.array([40, 40, 100])
+high_green = np.array([80, 80, 255])
 old_centroid = (0, 0)
 velocity = (0, 0)
 prediction = (0, 0)
@@ -20,8 +20,8 @@ previousIntersections = []
 previousAverages = []
 
 
-historyFrames = 1 #adjust for number of frames in intersection history
-bounceNum = 3 #adjust for number of predicted bounces
+historyFrames = 3 #adjust for number of frames in intersection history
+bounceNum = 2 #adjust for number of predicted bounces
 historyTolerance = 50 #adjust for tolerance in intersection decision (smaller for less detections)
 
 class Line:
@@ -58,7 +58,7 @@ def listAverage(intersections):
     newList = [i[1] for i in intersections]
     average = sum(newList) / len(newList)
     #print(f'Average: {int(average)}  Last Point: {intersections[len(intersections)-1]}')
-    if abs(average - intersections[len(intersections)-1][1]) < historyTolerance:
+    if abs(average - intersections[-1][1]) < historyTolerance:
         previousAverages.append(average)
         if len(previousAverages) > historyFrames:
             previousAverages.pop(0)
@@ -83,7 +83,7 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
     
     step += 1
 
-    dangerPoint = checkPotential(puck, velocity, puckLine, Line(999, (990, 0)), 90, 625)
+    dangerPoint = checkPotential(puck, velocity, puckLine, Line(999, (770, 0)), 0, 540)
     if dangerPoint is not None:
 
         previousIntersections.append(dangerPoint)
@@ -92,7 +92,7 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
             previousIntersections.pop(0)
 
         temp = [i[1] for i in previousIntersections]
-        average = (990, int(sum(temp) / len(temp)))
+        average = (770, int(sum(temp) / len(temp)))
 
         if listAverage(previousIntersections):
             cv2.line(frame, puck, average, (0, 0, 255), 2) 
@@ -178,17 +178,22 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
       
 
 #defines corners of table (will do this automatically with real camera)
-top = Line(0, (0, 90))
-bottom = Line(0, (0, 625))
-left = Line(999, (170, 0))
-right = Line(999, (1075, 0))
+top = Line(0, (0, 0))
+bottom = Line(0, (0, 540))
+left = Line(999, (150, 0))
+right = Line(999, (770, 0))
+
+
 
 #ASSUME RIGHT SIDE IS ROBOT SIDE
-scoreLine = Line(999, (1075, 0))
+scoreLine = Line(999, (670, 0))
+
         
 
 while(True):
     ret, frame = vid.read()
+
+    frame = cv2.resize(frame, (960, 540))
     
 
     
@@ -212,24 +217,14 @@ while(True):
             largest_contour = max(contours, key=cv2.contourArea)
             x, y, w, h = cv2.boundingRect(largest_contour)
 
-            # for cnt in contours:
-            #     x, y, w, h = cv2.boundingRect(cnt)
-            #     cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3)
 
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3) #rectangle around puck
 
-            cv2.circle(frame, (1075, 625), radius=5, color=(255,0,0), thickness=-1) #bottom right
-            cv2.circle(frame, (1075, 90), radius=5, color=(255,0,0), thickness=-1) #top right
-            cv2.circle(frame, (170, 90), radius=5, color=(255,0,0), thickness=-1) #top left
-            cv2.circle(frame, (170, 625), radius=5, color=(255,0,0), thickness=-1) #bottom left
 
             moments = cv2.moments(largest_contour)
             if moments["m00"] != 0:
                 centroid = (int(moments["m10"] / moments["m00"]), int(moments["m01"] / moments["m00"]))
     
-            # print(f'Velocity: {velocity}')
-            # print(f'Prediction: {prediction}')
-            # print(f'Actual: {centroid}\n\n')
                 
             # Compute velocity and prediction based off of previous frame
             velocity = (centroid[0] - old_centroid[0], centroid[1] - old_centroid[1])
@@ -245,7 +240,13 @@ while(True):
                 slope = 999
 
             puckLine = Line(slope, centroid) #defines line on which puck is traveling
-            #findBounce(velocity, centroid, puckLine, 0)
+            findBounce(velocity, centroid, puckLine, 0)
+
+
+            cv2.circle(frame, (150, 540), 15, (0, 255, 0), -1)
+            cv2.circle(frame, (150, 0), 15, (0, 255, 0), -1)
+            cv2.circle(frame, (770, 540), 15, (0, 255, 0), -1)
+            cv2.circle(frame, (770, 0), 15, (0, 255, 0), -1)
             
     count += 1
 
