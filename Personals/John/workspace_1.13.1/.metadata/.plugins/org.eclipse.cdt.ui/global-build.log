@@ -1,0 +1,401 @@
+13:39:03 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+13:43:58 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+14:56:07 **** Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+14:58:16 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+15:52:46 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+15:53:05 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+16:01:28 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+16:01:57 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+16:03:32 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+16:04:31 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   7728	     20	   1644	   9392	   24b0	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+15:58:20 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   7744	     20	   1644	   9408	   24c0	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+16:00:42 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7744	     20	   1644	   9408	   24c0	Motor.elf
+Finished building: default.size.stdout
+ 
+16:05:12 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:93:29: error: 'TIM1_CHANNEL_1' undeclared (first use in this function); did you mean 'TIM_CHANNEL_1'?
+   93 |   HAL_TIM_PWM_Start(&htim1, TIM1_CHANNEL_1);
+      |                             ^~~~~~~~~~~~~~
+      |                             TIM_CHANNEL_1
+../Core/Src/main.c:93:29: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+16:05:34 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   8196	     20	   1644	   9860	   2684	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+16:12:27 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   8180	     20	   1644	   9844	   2674	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+16:28:32 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8180	     20	   1644	   9844	   2674	Motor.elf
+Finished building: default.size.stdout
+ 
+16:28:40 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8180	     20	   1644	   9844	   2674	Motor.elf
+Finished building: default.size.stdout
+ 
+17:26:40 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8180	     20	   1644	   9844	   2674	Motor.elf
+Finished building: default.size.stdout
+ 
+17:27:57 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8180	     20	   1644	   9844	   2674	Motor.elf
+Finished building: default.size.stdout
+ 
+17:32:02 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   8180	     20	   1644	   9844	   2674	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+17:36:05 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-size   Motor.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8180	     20	   1644	   9844	   2674	Motor.elf
+Finished building: default.size.stdout
+ 
+17:52:46 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   8180	     20	   1644	   9844	   2674	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+17:54:53 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   8184	     20	   1644	   9848	   2678	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:14:24 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_hal_msp.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f0xx_hal_msp.d" -MT"Core/Src/stm32f0xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_hal_msp.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9152	     20	   1644	  10816	   2a40	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:15:53 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9152	     20	   1644	  10816	   2a40	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:21:07 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_hal_msp.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f0xx_hal_msp.d" -MT"Core/Src/stm32f0xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_it.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f0xx_it.d" -MT"Core/Src/stm32f0xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_it.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9148	     20	   1644	  10812	   2a3c	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:23:29 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9180	     20	   1644	  10844	   2a5c	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:26:48 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_hal_msp.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f0xx_hal_msp.d" -MT"Core/Src/stm32f0xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_it.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f0xx_it.d" -MT"Core/Src/stm32f0xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_it.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9180	     20	   1644	  10844	   2a5c	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:36:51 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9192	     20	   1644	  10856	   2a68	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:37:54 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9192	     20	   1644	  10856	   2a68	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:38:24 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9192	     20	   1644	  10856	   2a68	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:38:49 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9192	     20	   1644	  10856	   2a68	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:39:14 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9192	     20	   1644	  10856	   2a68	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:39:37 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9192	     20	   1644	  10856	   2a68	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:40:13 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9192	     20	   1644	  10856	   2a68	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 
+18:40:32 **** Incremental Build of configuration Debug for project Motor ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F091xC -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Motor.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Motor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Motor.elf
+ 
+arm-none-eabi-size   Motor.elf 
+arm-none-eabi-objdump -h -S  Motor.elf  > "Motor.list"
+   text	   data	    bss	    dec	    hex	filename
+   9192	     20	   1644	  10856	   2a68	Motor.elf
+Finished building: default.size.stdout
+ 
+Finished building: Motor.list
+ 

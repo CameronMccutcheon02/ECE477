@@ -1,0 +1,38 @@
+2023-10-05 15:57:41,448 [INFO] McuFinderGlobals:63 - Set McuFinder mode to 2 (CubeIDE integrated)
+2023-10-05 15:57:41,551 [INFO] UserAuth:179 - activating auth plugin
+2023-10-05 15:57:41,580 [INFO] UserAuth:393 - Internet connection configuration mode: 1
+2023-10-05 15:58:08,269 [INFO] WebApp:588 - userauth.ini deleted or not created
+2023-10-05 16:07:49,270 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 514633536 Bytes (1042284544)
+2023-10-05 16:07:50,826 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 560770872 Bytes (1042284544)
+2023-10-05 16:07:53,151 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 623062528 Bytes (1042284544)
+2023-10-05 16:07:53,820 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: NVIC
+2023-10-05 16:07:53,821 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: TIM1_8F0
+2023-10-05 16:07:53,822 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: GPIO
+2023-10-05 16:07:53,822 [INFO] BlockDiagram:2759 - set Specific Code input for plugin: RCC
+2023-10-05 16:07:53,826 [INFO] CodeGenerator:799 - code generatio: config db path: C:\ST\STM32CubeIDE_1.13.1\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.9.1.202307191849\\db\
+2023-10-05 16:07:54,298 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\MXTmpFiles\license.tmp_save
+2023-10-05 16:07:54,799 [INFO] CodeEngine:279 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\MXTmpFiles\license.tmp
+2023-10-05 16:07:55,013 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\MXTmpFiles\gpio.tmp_save
+2023-10-05 16:07:55,251 [INFO] CodeEngine:279 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\MXTmpFiles\gpio.tmp
+2023-10-05 16:07:55,462 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Src\stm32f0xx_it.c_save
+2023-10-05 16:07:55,744 [INFO] CodeEngine:279 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Src\stm32f0xx_it.c
+2023-10-05 16:07:55,774 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Inc\stm32f0xx_it.h_save
+2023-10-05 16:07:55,916 [INFO] CodeEngine:279 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Inc\stm32f0xx_it.h
+2023-10-05 16:07:56,063 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Src\stm32f0xx_hal_msp.c_save
+2023-10-05 16:07:56,311 [INFO] CodeEngine:279 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Src\stm32f0xx_hal_msp.c
+2023-10-05 16:07:56,337 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\MXTmpFiles\system.tmp_save
+2023-10-05 16:07:56,446 [INFO] CodeEngine:279 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\MXTmpFiles\system.tmp
+2023-10-05 16:07:56,532 [INFO] CodeEngine:311 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Inc\stm32f0xx_hal_conf.h_save
+2023-10-05 16:07:56,721 [INFO] CodeEngine:335 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Inc\stm32f0xx_hal_conf.h
+2023-10-05 16:07:56,846 [WARN] IPConfigManager:3431 - IP not found : TIM
+2023-10-05 16:07:56,849 [WARN] CodeGenerator:3760 - IP not found : null
+2023-10-05 16:07:56,915 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Inc\main.h_save
+2023-10-05 16:07:57,126 [INFO] CodeEngine:279 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Inc\main.h
+2023-10-05 16:07:57,236 [INFO] CodeEngine:255 - oldGeneratedFile, C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Src\main.c_save
+2023-10-05 16:07:57,838 [INFO] CodeEngine:279 - Generated code: C:\Users\john1\STM32CubeIDE\workspace_1.13.1\Motor\Core\Src\main.c
+2023-10-05 16:07:58,902 [INFO] ProjectBuilder:3064 - Time for Copy HAL[1] : 349mS.
+2023-10-05 16:07:58,920 [INFO] ProjectBuilder:4404 - Project Generator version: 4.1.0
+2023-10-05 16:07:59,309 [INFO] ConfigFileManager:1457 - The Die is : DIE442
+2023-10-05 16:07:59,359 [INFO] ApiDbMcu:507 - Load IP Config File for FATFS
+2023-10-05 16:07:59,392 [INFO] ApiDbMcu:507 - Load IP Config File for FREERTOS
+2023-10-05 16:07:59,436 [INFO] ApiDbMcu:507 - Load IP Config File for TOUCHSENSING
