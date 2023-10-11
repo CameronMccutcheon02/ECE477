@@ -3175,7 +3175,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 5d8c258d-c2fb-430b-9869-05711944c76e)
   )
-  (text "BOOT0 Pulldown\n\n" (at 50.8 168.91 0)
+  (text "BOOT0 Pulldown\n\n" (at 49.53 170.18 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 74084855-bceb-42da-b70c-bf87a3f33fde)
   )
