@@ -21,24 +21,6 @@
 #include <stdio.h>
 #include <string.h>
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim1;
@@ -48,9 +30,9 @@ DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 uint8_t txdata[30] = "Test STM to PC\n\r";
-uint8_t rxdata[9];
+uint8_t rxdata[4];
 uint8_t acknowledgement[15] = "Received: \n\r";
-uint8_t ack[5] = "ack\n\r";
+uint8_t ack[5] = "acl\n\r";
 uint8_t IR_beam[14];
 uint8_t score_read[10];
 uint8_t player1score;
@@ -67,14 +49,6 @@ static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM1_Init(void);
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -82,25 +56,16 @@ static void MX_TIM1_Init(void);
   */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
@@ -115,14 +80,10 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   HAL_UART_Receive_DMA(&huart2, rxdata, sizeof(rxdata));
-
   while (1)
   {
-    /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
   }
-  /* USER CODE END 3 */
 }
 
 /**
@@ -175,14 +136,8 @@ void SystemClock_Config(void)
 static void MX_TIM1_Init(void)
 {
 
-  /* USER CODE BEGIN TIM1_Init 0 */
-
-  /* USER CODE END TIM1_Init 0 */
-
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
-
-  /* USER CODE BEGIN TIM1_Init 1 */
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
@@ -221,11 +176,7 @@ static void MX_TIM1_Init(void)
 static void MX_USART2_UART_Init(void)
 {
 
-  /* USER CODE BEGIN USART2_Init 0 */
 
-  /* USER CODE END USART2_Init 0 */
-
-  /* USER CODE BEGIN USART2_Init 1 */
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
@@ -242,9 +193,6 @@ static void MX_USART2_UART_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN USART2_Init 2 */
-
-  /* USER CODE END USART2_Init 2 */
 
 }
 
@@ -337,24 +285,23 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 }
 
-void remove_char(char* str, char c)
+void remove_all_chars(char* str, char c)
 {
-    char *str1 = str, *str2 = str;
-    while (*str1) {
-        *str2 = *str1++;
-        str2 += (*str2 != c);
+    char *pr = str, *pw = str;
+    while (*pr) {
+        *pw = *pr++;
+        pw += (*pw != c);
     }
-    *str2 = '\0';
+    *pw = '\0';
 }
 
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed callback
 {
 	UNUSED(huart);
-	HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11), RESET);
-	remove_char(rxdata, 'b');
-	remove_char(rxdata, '\'');
+	remove_all_chars(rxdata, 'b');
+	remove_all_chars(rxdata, '\'');
 	sscanf(rxdata, "%d", &rx_read);
  	GPIOA -> BSRR = (uint32_t)((uint16_t)(rx_read));
 }
@@ -364,21 +311,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed 
   * @retval None
   */
 
-/* USER CODE END 4 */
-
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
 void Error_Handler(void)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
   {
   }
-  /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
