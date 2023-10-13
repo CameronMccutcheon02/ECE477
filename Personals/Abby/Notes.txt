@@ -1,3 +1,6 @@
+-------------- WEEK 8/9 PROGRESS ------------- 
+- fixed serial comms issue and am done with that for the time being
+
 -------------- WEEK 7 PROGRESS ------------- 
 -------- UPDATES --------
 - ir interfacing done 

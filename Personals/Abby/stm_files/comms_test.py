@@ -8,15 +8,24 @@ ser.close()
 ser.open()
 ser.flush()
 
+'''
+vals = [b'4080', b'4064', b'4032', b'3968', b'3840', b'3584', b'3072', b'2048', b'0000', b'4080', b'4064', b'4032', b'3968', b'3840', b'3584', b'3072', b'2048', b'0000']
+i = 0
+while i < 3:
+    for x in vals:
+        ser.flush()
+        print(x)
+        ser.write(x)
+        time.sleep(.025)
+    i = i + 1
+'''
 while(True):
     ser.flush()
     raw_data = input("enter data: ")
     data_to_send = str((int(raw_data, base=2) << 4))
     while(len((data_to_send)) < 4):
         data_to_send = "0" + data_to_send
-    data_to_send = data_to_send + "\n\r"
     data_to_send = data_to_send.encode("ascii")
     print(data_to_send)
     ser.write(data_to_send)
-    time.sleep(.5)
-    print("read: " + str(ser.readline()))
+    time.sleep(.1)
