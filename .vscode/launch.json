@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/halus/Documents/ECE477/ECE477/Personals/Abby/stm_files",
-      "program": "c:/Users/halus/Documents/ECE477/ECE477/Personals/Abby/stm_files/build/Debug/outDebug",
+      "cwd": ".",
+      "program": "build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

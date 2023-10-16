@@ -1,5 +1,22 @@
 -------------- WEEK 8/9 PROGRESS ------------- 
+-------- UPDATES --------
 - fixed serial comms issue and am done with that for the time being
+- updated ir sensors to be PB6-7, still EXTI4_15
+-------- TO-DO --------
+- 3D print camera mount
+- interface 7seg w stm (in progress)
+- combine john's motor code w my uart code to have motor spin as specified by PC
+-------- NOTES --------
+--- 7 SEG
+PA0-3 used for USART connection | **tested and verified**
+PA8-11, PB7-8 Used for PWM/motor control | 
+PB3-5 used for SPI for the 7 segment | 
+- PB3 SPI1_SCK (SRCLK)
+- PB4 SPI1_MISO (SER)4
+- PB5 SPI1_MOSI (RCLK)p
+PC6-7 for IR sensors | **tested and verified**
+- https://deepbluembedded.com/stm32-spi-tutorial/ 
+- https://www.youtube.com/watch?v=cVplF4dvDk8 
 
 -------------- WEEK 7 PROGRESS ------------- 
 -------- UPDATES --------
