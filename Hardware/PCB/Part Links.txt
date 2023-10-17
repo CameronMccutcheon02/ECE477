@@ -1,0 +1,14 @@
+SPI level Translator
+https://www.mouser.com/ProductDetail/Texas-Instruments/TXB0104D?qs=oFXvjAmG9Eh0u9dpGkn5zg%3D%3D
+
+Motor Level Translator
+https://www.mouser.com/ProductDetail/Texas-Instruments/SN74AVC8T245PW?qs=gb35HGp1gQL2Hoz%2FdlVKrQ%3D%3D
+
+USB to UART converter
+https://www.mouser.com/ProductDetail/FTDI/FT231XS-R?qs=Gp1Yz1mis3WduRPsgrTbtg%3D%3D
+
+LDO
+https://www.mouser.com/ProductDetail/Texas-Instruments/REG1117-3.3G4?qs=quKhnJqH4FhyowGGftIF6w%3D%3D
+
+Reset Switch
+https://www.mouser.com/ProductDetail/CK/PTS645SM73JSMTR92-LFS?qs=TiOZkKH1s2SGGD4RJBus5w%3D%3D
