@@ -1,0 +1,157 @@
+----------- WEEK 7 PROGRESS ------------- 
+-------- UPDATES --------
+- ir interfacing done 
+- serial comms prototyped w LEDs
+    - 0b11111111 << 4
+    - PC interfacing with stm is working great -> i can use teraterm to write a value and STM reads, parses, and uses it to control output LEDs. when i do the same thring with pyserial, it is quite delayed and i think the data is being sent separately. overall working good but need to debug pyserial issue
+
+-------- NOTES --------
+- IR interfacing    
+    - using timer1, EXTI4_15_IRQ
+    - wrote callback function to increment player 1 and 2 scores whenever IR triggered (HAL_GPIO_EXTI_Callback)
+        - print to terminal over usart
+        - GPIO configs: GPIO pins 10 and 11 for player 1 and 2 score interrupts, init on falling (GPIO_MODE_IT_FALLING), had to use pull_up resistors otherwise doesn't work. 
+        - referenced in stm32f0xx_hal_gpio.c in HAL_GPIO_EXTI_IRQHandler, which has gpio pin as argument and clears the interupt before calling the callback function. this handler is clld in EXTI4_15_IRQHandler in stm32f0xx_it.c
+- serial comms
+    - i can send an 8-bit packet from PC/python to control the corresponding LEDs 
+        - converting a byte packet to an int was a bit complicated in C, so i accept an 8-bit packet in python, convert it to a string of the integer version, and then use sscanf() in C to convert a string to an int
+        - i had to ensure that the same size string is always being sent
+
+-------- PLAN --------
+* Determine which pins for what 
+* Look over PCB design
+* Update funnel design so puck doesn't get stuck
+* update website
+- To-do:
+    - Website updates
+        - add all assignments / Reports (update if grade warrents)
+        - add all data sheets
+        - add PCB
+        - presentation slides 
+    - print camera mount
+    - redesign puck funnels
+
+-------------- WEEK 6 PROGRESS ------------- 
+-------- UPDATES --------
+- IR sensors working in STM32Cube and blinking LED / sending serial output whenever beam is broken
+    - need to improve by implementing interrupts, currently polling. using GPIOA
+    - using HAL
+- IR sensors are in and i tested and verified with an Arduino script -> they work up to 8 in. away which is max what we would need
+
+-------- NOTES --------
+- got 2 TLC59211 sink drivers from EE shop to replace DM13A https://www.ti.com/lit/ds/symlink/tlc59211.pdf?ts=1695918250430&ref_url=https%253A%252F%252Fwww.google.com%252F
+- interfacing IR sensors w STM: https://ruturajn.hashnode.dev/interfacing-ir-sensor-with-the-stm32f407-discovery-kit-using-external-interrupt
+- stm32f091 data sheet: https://www.st.com/en/microcontrollers-microprocessors/stm32f091rc.html
+- dependencies: HAL
+TM
+STM32Fxxx HAL
+
+-------- PLAN --------
+- Wed: 7-segment, camera print, resin mount print, update website with datasheets!!!!!
+- Thurs: 7-segment
+- Fri: software formalization doc, IR sensors ?
+
+-------------- WEEK 5 PROGRESS ------------- 
+-------- UPDATES -------- 
+- I have a countdown from 10 working on 1 362 7-segment with an Arduino Nano
+    - Had to use sink driver and transistors to accomodate for current flow
+    - https://ece362-purdue.github.io/f2022-public-labs/lab-03/lab_03.html
+- Designed and printed 2 ramps that will be done by Wed Morning
+- Printed Cameron's motor mount design
+- Assisted Cameron in disassembling the table borders
+- Rewrote project description 
+- Printer motor mounts and updated ramp shoot and scoreboard extenders
+- Looked into dm13a
+    - pinout: https://pdf1.alldatasheet.com/datasheet-pdf/view/825460/SITI/DM13A-E.html
+    - it seems dm13a might only support common cathode, but i am looking into it. https://forum.arduino.cc/t/need-help-with-dm13a-16-bit-shift-register-ic/580565
+        - an alternative chip might be okay
+    - https://github.com/michaelkamprath/ShiftRegisterLEDMatrixLib
+    - 595 pinout: https://www.ti.com/lit/ds/symlink/sn74hc595.pdf?ts=1695281292760&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252Fko-kr%252FSN74HC595%253Futm_source%253Dgoogle%2526utm_medium%253Dcpc%2526utm_campaign%253Dasc-int-null-44700044498855648_prodfolderdynamic-cpc-pf-google-kr_int%2526utm_content%253Dprodfolddynamic%2526ds_k%253DDYNAMIC%2BSEARCH%2BADS%2526DCM%253Dyes%2526gclid%253DEAIaIQobChMIjbah8Za7gQMV6doWBR0ViwdyEAAYASAAEgKsAfD_BwE%2526gclsrc%253Daw.ds
+- Updated PSDR #4 on website
+- Placed an order through business office for break beams
+
+-------- NOTES -------- 
+- Interfacing with 7-segment: https://www.youtube.com/watch?v=_74fpCfT_tA
+- Shift regs and 7-segment: https://www.youtube.com/watch?v=QI1IJLB42G8 
+- Schematic: https://ece362-purdue.github.io/f2022-public-labs/lab-03/lab_03.html 
+- Prototyping with arduino  
+    - TLC sink driver to sink the current flow so it can be used with micro: https://www.ti.com/lit/ds/symlink/tlc59211.pdf?ts=1695063006948&ref_url=https%253A%252F%252Fwww.google.com%252F
+    - PN2907A transistor for each anode of each digit of the display will proide at least 200 mA of current bc the micro cannot supply enough current for the display
+    - CD74HC595E shift regs - https://www.ti.com/lit/ds/symlink/cd74hc595.pdf?HQS=dis-mous-null-mousermode-dsf-pf-null-wwe&ts=1695051021412&ref_url=https%253A%252F%252Fwww.ti.com%252Fgeneral%252Fdocs%252Fsuppproductinfo.tsp%253FdistId%253D26%2526gotoUrl%253Dhttps%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Fcd74hc595 
+    - Got parts from EE shop. Breadboard was partly fried so it took time to replicate circuit on a different board. 
+    - Am able to countdown from 10 using nano. Planning o have digits show whenever data is received from PC
+
+-------------- WEEK 4 PROGRESS ------------- 
+-------- UPDATES -------- 
+- Can write from STM and read from Python 
+- Added code to auto-detect the COM port to be read from in Python
+- DMA research: https://wiki.st.com/stm32mcu/wiki/Getting_started_with_DMA 
+- Can write to STM from PC in serial_write.py
+    - I then write back an ACK containing the data that was read, so writing to the PC the data that was sent from PC
+- Added serial_read to confirm reading is working. Serial_write reads and writes
+- Printed v1 of scoreboard extenders, tested and modified, printing v2 now
+- Changed from UART5 to UART2
+
+-------- TO-DO -------- 
+- read rx in stm32cube instead of reading from PC, document for pr
+- merge my code w cameron's cube environment
+
+-------- NOTES -------- 
+RealTerm settings:
+-Display: Half duplex 
+-Port: 115200, port 6, change
+-Capture: +CR, +LR, (type data and send ascii)
+
+Updated PSDRs: 
+PSDR #1 (Hardware): An ability to use a microcontroller to control the XY directions of a gantry system using PWM and 2 motors. 
+PSDR #2 (Hardware): An ability to interface with an IC to establish communication and send data between a microcontroller and a PC via UART.
+PSDR #3 (Hardware): An ability to interface a seven-segment display scoreboard with shift registers. 
+ 
+Stretch goals:
+An ability to produce sound using speakers in the scoreboard system.
+An ability to change the speed of the robot via a button. 
+
+-------------- WEEK 3 PROGRESS ------------- 
+-------------- SENDING DATA FROM PC ------------- 
+- Code contained in serial_write.py 
+
+Potential dependencies for serial communication 
+- infi.devicemanager (https://pypi.org/project/infi.devicemanager/)
+- pyusb
+- libusb
+
+-Potential CLI implementation of RealTerm or TeraTerm (https://realterm.sourceforge.io/#Command_Line_Parameters)
+-------------- RECEIVING DATA ON STM -------------- 
+- Created project in STM32Cube (https://www.youtube.com/watch?v=7kUo-ekxmCA)
+Settings:
+    - Cleared all pinouts
+    - Set high speed clock under RCC to Crystal/Ceramic Resonator
+    - Enabled aysnch USART 2 with enabled global interrupt and 9600 baud rate
+    - Added circular DMA USART2_RX so mem doesn't fill up
+    - Installed STSW-LINK007 to update ST-Link adapter FW
+
+- I'm using TeraTerm to open the serial connection on COM3.
+- Using built in HAL_UART_Receive function  
+- Reading serial data(https://www.youtube.com/watch?v=7kUo-ekxmCA timestamp 8 min)
+- DMA over receiving UART
+- RealTerm app is used to send serial data to test reading on the STM behalf (serial capture program)
+
+-------------- DIMENSIONS for CAD (mm) -------------- 
+- score board extenders
+54.31 outter diameter
+49.05 inner diameter
+54.47 gole diameter
+43.40 length
+
+- camera 
+38.08 x 38.08 
+16.75 mm to cable
+
+-------------- TO-DO -------------- 
+- Read serial data on STM
+- Send data from PC
+- 3D print score board extenders
+- 3D print camera holder
+
+*** send link to 3DWox in Teams
+
