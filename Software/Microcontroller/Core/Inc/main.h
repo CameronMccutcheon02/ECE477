@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -57,6 +59,36 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define IR_Sensor_IO1_Pin GPIO_PIN_6
+#define IR_Sensor_IO1_GPIO_Port GPIOC
+#define IR_Sensor_IO2_Pin GPIO_PIN_7
+#define IR_Sensor_IO2_GPIO_Port GPIOC
+#define Limit_SW1_Pin GPIO_PIN_9
+#define Limit_SW1_GPIO_Port GPIOC
+#define PUL_A_Pin GPIO_PIN_8
+#define PUL_A_GPIO_Port GPIOA
+#define DIR_A_Pin GPIO_PIN_9
+#define DIR_A_GPIO_Port GPIOA
+#define PUL_B_Pin GPIO_PIN_10
+#define PUL_B_GPIO_Port GPIOA
+#define DIR_B_Pin GPIO_PIN_11
+#define DIR_B_GPIO_Port GPIOA
+#define Limit_SW2_Pin GPIO_PIN_10
+#define Limit_SW2_GPIO_Port GPIOC
+#define Limit_SW3_Pin GPIO_PIN_11
+#define Limit_SW3_GPIO_Port GPIOC
+#define Limit_SW4_Pin GPIO_PIN_12
+#define Limit_SW4_GPIO_Port GPIOC
+#define DIR_IC_Pin GPIO_PIN_6
+#define DIR_IC_GPIO_Port GPIOB
+#define EN_A_Pin GPIO_PIN_7
+#define EN_A_GPIO_Port GPIOB
+#define BOOT0_Pin GPIO_PIN_11
+#define BOOT0_GPIO_Port GPIOF
+#define EN_B_Pin GPIO_PIN_8
+#define EN_B_GPIO_Port GPIOB
+#define _OE_Pin GPIO_PIN_9
+#define _OE_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
