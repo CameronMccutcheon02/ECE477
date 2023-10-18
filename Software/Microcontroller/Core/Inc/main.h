@@ -59,6 +59,24 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Test_Pin1_Pin GPIO_PIN_6
+#define Test_Pin1_GPIO_Port GPIOA
+#define Test_Pin2_Pin GPIO_PIN_7
+#define Test_Pin2_GPIO_Port GPIOA
+#define Test_Pin3_Pin GPIO_PIN_4
+#define Test_Pin3_GPIO_Port GPIOC
+#define Test_Pin4_Pin GPIO_PIN_5
+#define Test_Pin4_GPIO_Port GPIOC
+#define Test_Pin5_Pin GPIO_PIN_0
+#define Test_Pin5_GPIO_Port GPIOB
+#define Test_Pin6_Pin GPIO_PIN_1
+#define Test_Pin6_GPIO_Port GPIOB
+#define Test_Pin7_Pin GPIO_PIN_2
+#define Test_Pin7_GPIO_Port GPIOB
+#define Test_Pin8_Pin GPIO_PIN_10
+#define Test_Pin8_GPIO_Port GPIOB
+#define Test_Pin9_Pin GPIO_PIN_11
+#define Test_Pin9_GPIO_Port GPIOB
 #define IR_Sensor_IO1_Pin GPIO_PIN_6
 #define IR_Sensor_IO1_GPIO_Port GPIOC
 #define IR_Sensor_IO2_Pin GPIO_PIN_7
@@ -83,8 +101,6 @@ void Error_Handler(void);
 #define DIR_IC_GPIO_Port GPIOB
 #define EN_A_Pin GPIO_PIN_7
 #define EN_A_GPIO_Port GPIOB
-#define BOOT0_Pin GPIO_PIN_11
-#define BOOT0_GPIO_Port GPIOF
 #define EN_B_Pin GPIO_PIN_8
 #define EN_B_GPIO_Port GPIOB
 #define _OE_Pin GPIO_PIN_9
