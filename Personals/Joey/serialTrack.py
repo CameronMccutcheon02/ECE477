@@ -15,10 +15,9 @@ prediction = (0, 0)
 centroid = (0, 0)
 count = 0
 global previousIntersections
-global location
+global previousAverages
 previousIntersections = [(0,0), (0,0), (0,0)]
-
-
+previousAverages = []
 
 
 historyFrames = 3 #adjust for number of frames in intersection history
@@ -57,9 +56,13 @@ class Line:
 
 def listAverage(intersections):
     newList = [i[1] for i in intersections]
-
+    average = sum(newList) / len(newList)
+    #print(f'Average: {int(average)}  Last Point: {intersections[len(intersections)-1]}')j
     #print(abs(intersections[-2][1] - intersections[-1][1]))
     if abs(intersections[-2][1] - intersections[-1][1]) > historyTolerance:
+        previousAverages.append(average)
+        if len(previousAverages) > historyFrames:
+            previousAverages.pop(0)
         return True
     else:
         return False
@@ -95,12 +98,7 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
         if listAverage(previousIntersections):
             cv2.line(frame, puck, average, (0, 0, 255), 2) 
             cv2.circle(frame, average, radius=15, color=(0, 255, 0), thickness=-1)
-            print(f'Move motor to: {previousIntersections[-1]}')
-
-            #NEW MOTOR STUFF
-            displacement = previousIntersections[-1][1] - previousIntersections[-2][1]
-            print(displacement)
-            #print(displacement)
+            print(f'Move motor to: {average}')
 
 
     if velocity[0] >= 0 and velocity[1] >= 0: 
