@@ -4,11 +4,16 @@ import time
 import math
 
 video = 'airhockey.mp4'
+video2 = 'Joey\greenhockey.mp4'
 camera = 1
-vid = cv2.VideoCapture(video)
+vid = cv2.VideoCapture(video2)
 
-low_red = np.array([0, 150, 150])
-high_red = np.array([150, 255, 200])
+# low_red = np.array([0, 150, 150])
+# high_red = np.array([150, 255, 200])
+
+low_red = np.array([40, 40, 100])
+high_red = np.array([80, 80, 255])
+
 old_centroid = (0, 0)
 velocity = (0, 0)
 prediction = (0, 0)
@@ -189,7 +194,7 @@ scoreLine = Line(999, (1075, 0))
 
 while(True):
     ret, frame = vid.read()
-    
+    frame = cv2.resize(frame, (960, 540))
 
     
     if ret == True:
@@ -245,8 +250,8 @@ while(True):
     count += 1
 
     cv2.imshow('Frame', frame)
-    #time.sleep(0.04)
-    time.sleep(0.5)
+    time.sleep(0.04)
+    #time.sleep(0.5)
 
     if cv2.waitKey(1) == 27:
         break
