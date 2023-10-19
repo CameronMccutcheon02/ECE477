@@ -2,21 +2,32 @@
 -------- UPDATES --------
 - fixed serial comms issue and am done with that for the time being
 - updated ir sensors to be PB6-7, still EXTI4_15
+- 3D printed iterations of camera mount
+- 3d printed puck idk why tho tbh
+- control motor directions with data sent from PC
+- progress with 7seg and stm    
+    - tim2
+    - full-duplex master mode spi 
+    - verified SPI works w selected pins, but not yet w 7seg. power issues - working with john
+    - tested with test code, sending off to john
+- ordered ICs to be in by Thurs
+- merged code to one project and pushed to Github
 -------- TO-DO --------
-- 3D print camera mount
 - interface 7seg w stm (in progress)
-- combine john's motor code w my uart code to have motor spin as specified by PC
+- submit moonshot pitch 
+- submit procurement order for gantry
 -------- NOTES --------
 --- 7 SEG
 PA0-3 used for USART connection | **tested and verified**
 PA8-11, PB7-8 Used for PWM/motor control | 
 PB3-5 used for SPI for the 7 segment | 
-- PB3 SPI1_SCK (SRCLK)
-- PB4 SPI1_MISO (SER)4
-- PB5 SPI1_MOSI (RCLK)p
+- PB3 SPI2_SCK (SRCLK)(clockpin)(HC pin 11)
+- PB6 gpio_output (SER)(latchPin)(HC pin 12)
+- PB5 SPI2_MOSI (RCLK)(dataPin)(HC pin 14)
 PC6-7 for IR sensors | **tested and verified**
 - https://deepbluembedded.com/stm32-spi-tutorial/ 
 - https://www.youtube.com/watch?v=cVplF4dvDk8 
+- https://www.digikey.com/en/maker/projects/getting-started-with-stm32-how-to-use-spi/09eab3dfe74c4d0391aaaa99b0a8ee17 [SPI CODE EXAMPLE FROM DIGIKEY]
 
 -------------- WEEK 7 PROGRESS ------------- 
 -------- UPDATES --------
