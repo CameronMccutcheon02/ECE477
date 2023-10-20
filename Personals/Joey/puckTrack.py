@@ -4,7 +4,7 @@ import time
 import math
 
 video = 'airhockey.mp4'
-video2 = 'Joey\greenhockey.mp4'
+video2 = 'greenhockey.mp4'
 camera = 1
 vid = cv2.VideoCapture(video2)
 
