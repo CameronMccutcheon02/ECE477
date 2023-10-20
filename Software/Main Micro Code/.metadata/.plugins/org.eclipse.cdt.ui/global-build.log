@@ -245,3 +245,17 @@ arm-none-eabi-size   MainMicro.elf
   21496	    164	   2268	  23928	   5d78	MainMicro.elf
 Finished building: default.size.stdout
  
+20:01:06 **** Incremental Build of configuration Debug for project MainMicro ****
+make -j8 all 
+arm-none-eabi-size   MainMicro.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21496	    164	   2268	  23928	   5d78	MainMicro.elf
+Finished building: default.size.stdout
+ 
+20:03:00 **** Incremental Build of configuration Debug for project MainMicro ****
+make -j8 all 
+arm-none-eabi-size   MainMicro.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21496	    164	   2268	  23928	   5d78	MainMicro.elf
+Finished building: default.size.stdout
+ 

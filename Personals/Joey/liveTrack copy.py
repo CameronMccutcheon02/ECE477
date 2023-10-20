@@ -4,7 +4,7 @@ import time
 import math
 from serial_comms import setup_serialobject, serial_write
 
-video = 'Personals\Joey\green3.mp4'
+video = 'green3.mp4'
 camera = 1
 vid = cv2.VideoCapture(video)
 
