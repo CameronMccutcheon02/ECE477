@@ -656,7 +656,7 @@
 
   (footprint "MountingHole:MountingHole_2.7mm_M2.5" (layer "F.Cu")
     (tedit 56D1B4CB) (tstamp 34d196ab-cc64-4146-bdb5-09ff49253f16)
-    (at 209.042 69.342)
+    (at 208.788 69.342)
     (descr "Mounting Hole 2.7mm, no annular, M2.5")
     (tags "mounting hole 2.7mm no annular m2.5")
     (property "Sheetfile" "MainMicro.kicad_sch")
