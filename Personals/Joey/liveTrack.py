@@ -3,9 +3,9 @@ import numpy as np
 import time
 import math
 
-video = 'greenhockey.mp4'
+video = 'Joey\green3.mp4'
 camera = 1
-vid = cv2.VideoCapture(0)
+vid = cv2.VideoCapture(video)
 
 low_green = np.array([40, 40, 100])
 high_green = np.array([80, 80, 255])
@@ -15,14 +15,15 @@ prediction = (0, 0)
 centroid = (0, 0)
 count = 0
 global previousIntersections
-global previousAverages
-previousIntersections = []
-previousAverages = []
+global location
+previousIntersections = [(0,0), (0,0), (0,0)]
+
+
 
 
 historyFrames = 3 #adjust for number of frames in intersection history
 bounceNum = 2 #adjust for number of predicted bounces
-historyTolerance = 50 #adjust for tolerance in intersection decision (smaller for less detections)
+historyTolerance = 10 #adjust for tolerance in intersection decision (smaller for less detections)
 
 class Line:
     def __init__(self, slope, point):
@@ -56,12 +57,9 @@ class Line:
 
 def listAverage(intersections):
     newList = [i[1] for i in intersections]
-    average = sum(newList) / len(newList)
-    #print(f'Average: {int(average)}  Last Point: {intersections[len(intersections)-1]}')
-    if abs(average - intersections[-1][1]) < historyTolerance:
-        previousAverages.append(average)
-        if len(previousAverages) > historyFrames:
-            previousAverages.pop(0)
+
+    #print(abs(intersections[-2][1] - intersections[-1][1]))
+    if abs(intersections[-2][1] - intersections[-1][1]) > historyTolerance:
         return True
     else:
         return False
@@ -97,7 +95,12 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
         if listAverage(previousIntersections):
             cv2.line(frame, puck, average, (0, 0, 255), 2) 
             cv2.circle(frame, average, radius=15, color=(0, 255, 0), thickness=-1)
-            print(f'Move motor to: {average}')
+            print(f'Move motor to: {previousIntersections[-1]}')
+
+            #NEW MOTOR STUFF
+            displacement = previousIntersections[-1][1] - previousIntersections[-2][1]
+            print(displacement)
+            #print(displacement)
 
 
     if velocity[0] >= 0 and velocity[1] >= 0: 
