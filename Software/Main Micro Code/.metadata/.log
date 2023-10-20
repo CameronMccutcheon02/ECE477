@@ -307,3 +307,51 @@ java.lang.Exception: Resource '/MainMicro' does not exist.
 
 !ENTRY org.eclipse.cdt.core 1 0 2023-10-18 18:06:42.530
 !MESSAGE Indexed 'MainMicro' (23 sources, 113 headers) in 2.05 sec: 10,868 declarations; 64,177 references; 8 unresolved inclusions; 1,151 syntax errors; 1,383 unresolved names (1.8%)
+!SESSION 2023-10-19 16:18:56.096 -----------------------------------------------
+eclipse.buildId=Version 1.13.1
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-10-19 16:19:13.627
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-10-19 16:19:13.647
+!MESSAGE Log4j2 initialized with config file \\nas01.itap.purdue.edu\puhome\My Documents\477\ECE477 fr\ECE477\Software\Main Micro Code\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-10-19 16:19:18.105
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2023-10-19 17:44:41.692
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.gdb.internal.ui.actions.DsfTerminateCommand$3$1@508f472b): Status OK: unknown code=0 OK' resulted in a rejected execution exception.
+!SESSION 2023-10-19 18:21:47.899 -----------------------------------------------
+eclipse.buildId=Version 1.13.1
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-10-19 18:21:56.063
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-10-19 18:21:56.078
+!MESSAGE Log4j2 initialized with config file \\nas01.itap.purdue.edu\puhome\My Documents\477\ECE477 fr\ECE477\Software\Main Micro Code\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-10-19 18:22:02.313
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2023-10-19 19:59:39.336 -----------------------------------------------
+eclipse.buildId=Version 1.13.1
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-10-19 19:59:59.317
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-10-19 19:59:59.317
+!MESSAGE Log4j2 initialized with config file C:\Users\colli384\Documents\ECE477\Software\Main Micro Code\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-10-19 20:00:05.218
+!MESSAGE Started RMI Server, listening on port 41337
