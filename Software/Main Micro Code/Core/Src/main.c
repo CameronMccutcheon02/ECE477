@@ -22,7 +22,7 @@
 #include <string.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-// remember to fix .elf file
+
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
@@ -47,6 +47,7 @@ int arr_value;
 int speed_data_range;
 int arr_range;
 int arr_value;
+char *sign;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -105,10 +106,12 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   HAL_UART_Receive_DMA(&huart2, rxdata, sizeof(rxdata));
-  HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-
 	TIM1->CCR1 = 2000;
 	TIM1->ARR = 4000;
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+
+	//HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+
 	//HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -464,6 +467,35 @@ int map_speed(speed_data)
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed callback
 {
 	UNUSED(huart);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	TIM1->CCR1 = 200;
+	TIM1->ARR = 400;
+
+	char *sign = NULL;
+
+	remove_all_chars(rxdata, 'b');
+	remove_all_chars(rxdata, '\'');
+	sign = strstr(rxdata, "-");
+
+	if(sign)
+	{
+ 		HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), SET);
+	}
+ 	else
+ 	{
+ 		HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), RESET);
+ 	}
+	/*
+	sscanf(rxdata, "%d", &rx_read);
+ 	if(((uint16_t)(rx_read)) >> 7)
+	{
+ 		HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), SET);
+	}
+ 	else
+ 	{
+ 		HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), RESET);
+ 	}
+ 	*/
 	/*
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	remove_all_chars(rxdata, 'b');
@@ -476,21 +508,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed 
 	TIM1->CCR1 = arr_data_raw / 2;
 	TIM1->ARR = arr_data_raw;
 	*/
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	TIM1->CCR1 = 2000;
-	TIM1->ARR = 4000;
-	remove_all_chars(rxdata, 'b');
-	remove_all_chars(rxdata, '\'');
-	//char *sign = strstr(rxdata, "-")
-	sscanf(rxdata, "%d", &rx_read);
- 	if(((uint16_t)(rx_read)) >> 7)
-	{
- 		HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), SET);
-	}
- 	else
- 	{
- 		HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), RESET);
- 	}
 }
 /* USER CODE END 4 */
 
