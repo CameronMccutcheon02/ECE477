@@ -2,13 +2,17 @@ import cv2
 import numpy as np
 import time
 import math
+from calibration import findRange
 
-video = 'Joey\green3.mp4'
+video = 'greenhockey.mp4'
 camera = 1
 vid = cv2.VideoCapture(video)
 
-low_green = np.array([40, 40, 100])
-high_green = np.array([80, 80, 255])
+# low_green = np.array([40, 40, 100])
+# high_green = np.array([80, 80, 255])
+
+low_green, high_green = findRange(vid.read()[1]) #automatically detect puck color range
+
 old_centroid = (0, 0)
 velocity = (0, 0)
 prediction = (0, 0)
@@ -95,11 +99,11 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
         if listAverage(previousIntersections):
             cv2.line(frame, puck, average, (0, 0, 255), 2) 
             cv2.circle(frame, average, radius=15, color=(0, 255, 0), thickness=-1)
-            print(f'Move motor to: {previousIntersections[-1]}')
+            #print(f'Move motor to: {previousIntersections[-1]}')
 
             #NEW MOTOR STUFF
             displacement = previousIntersections[-1][1] - previousIntersections[-2][1]
-            print(displacement)
+            #print(displacement)
             #print(displacement)
 
 
