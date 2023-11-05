@@ -1,23 +1,10 @@
--------------- WEEK 10 PROGRESS ------------- 
+-------------- WEEK 12 PROGRESS ------------- 
 Notes:
-- motor control
-    - made function run_motors(pulses), called when motor_flag = 1
-    - 400 steps / revolution @ 1 Khz clock -> 1000 pulses per second
-    - send in the number of pulses. 400 pulses = 1 revolution, 800 pulses = 2 revolutions
-    - joey's code outputs roughly in a range of (-10, 300) so that worked well with pulsing
-    - want to look into a better way of implementing this -> there is deviation over time
-        - we are just using HAL_TIM_Start and stop for HAL_Delay ms. 
-        - looking into using RCR with timers and interrupts to improve precision
-        - https://community.st.com/t5/stm32-mcus-products/how-to-use-rcr-to-produce-a-fixed-amount-of-pwm-pulses/td-p/192555 
-    - TIM1 -> ARR = 200, CCR1 = 100, time = pulses * .2 | fast reaction speed
+
 
 To-do:
-- look into e-stop motors for 24 vdc
-- use parts list to organize parts and work area
+- finish soldering discrete components
+- integrate 7 segment with stm
+- add other motor to stm
+- 3D print motor mounts
 - re-print new funnel design
-- practice soldering
-- ask cameron abt uart connector
-- submit another purchase request
-    - 5V barrel jack power supply
-    - linear rail 
-    - limit switches
