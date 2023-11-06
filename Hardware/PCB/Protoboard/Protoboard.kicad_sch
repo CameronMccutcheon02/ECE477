@@ -1230,7 +1230,7 @@
   (symbol (lib_id "Device:R") (at 48.26 45.72 90) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 8277476c-b798-4057-b547-52abc06333bd)
-    (property "Reference" "R1" (id 0) (at 52.07 44.45 90))
+    (property "Reference" "R3" (id 0) (at 52.07 44.45 90))
     (property "Value" "10" (id 1) (at 48.26 45.72 90))
     (property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" (id 2) (at 48.26 47.498 90)
       (effects (font (size 1.27 1.27)) hide)
@@ -1245,7 +1245,7 @@
   (symbol (lib_id "Device:R") (at 48.26 40.64 90) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid ad10a4b7-2487-448c-860c-e5fa438bed4f)
-    (property "Reference" "R3" (id 0) (at 52.07 39.37 90))
+    (property "Reference" "R1" (id 0) (at 52.07 39.37 90))
     (property "Value" "10" (id 1) (at 48.26 40.64 90))
     (property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" (id 2) (at 48.26 42.418 90)
       (effects (font (size 1.27 1.27)) hide)
@@ -1393,13 +1393,13 @@
     (path "/64ccce52-4fcc-4e8f-882a-1f2c7b02e7f9"
       (reference "J3") (unit 1) (value "Conn_01x08_Female") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical")
     )
-    (path "/8277476c-b798-4057-b547-52abc06333bd"
+    (path "/ad10a4b7-2487-448c-860c-e5fa438bed4f"
       (reference "R1") (unit 1) (value "10") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
     )
     (path "/41dd8dbe-60e2-416e-bb81-b16a7ee0f28c"
       (reference "R2") (unit 1) (value "10") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
     )
-    (path "/ad10a4b7-2487-448c-860c-e5fa438bed4f"
+    (path "/8277476c-b798-4057-b547-52abc06333bd"
       (reference "R3") (unit 1) (value "10") (footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder")
     )
     (path "/260e9586-0241-4498-9f23-49387b03d4f9"
