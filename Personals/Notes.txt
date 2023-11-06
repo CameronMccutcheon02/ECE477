@@ -1,15 +1,7 @@
 *** Notes on PCB Assembly ***
-- systems soldered to this point
-    - barrel jack power 
-    - LDO power
-    - USB - UART io
-- systems to solder
-    - sw1
-    - connectors
-    - u5 (motor level)
-    - u6 (7 seg)
-
 - potential considerations
     - exposed copper by pin 1 of U2
     - pin1 and pin2 bridged of U2, but shouldnt cause any issues
     - via with solder by C2
+    - PB8 on micro / motor enable 2 looks cut off
+    - solder under R7? is that an issue, i can't tell if there is acually solder under there

@@ -1,6 +1,7 @@
 -------------- WEEK 12 PROGRESS ------------- 
 Notes:
-
+- soldered rest of capacitors and most of rest of resistors onto PCB
+- reprinted check off form
 
 To-do:
 - finish soldering discrete components
