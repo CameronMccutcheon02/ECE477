@@ -4,9 +4,9 @@ import time
 import math
 from calibration import findRange
 
-video = 'greenhockey.mp4'
-camera = 1
-vid = cv2.VideoCapture(video)
+video = 'green2.mp4'
+camera = 0
+vid = cv2.VideoCapture(camera)
 
 # low_green = np.array([40, 40, 100])
 # high_green = np.array([80, 80, 255])
@@ -23,11 +23,9 @@ global location
 previousIntersections = [(0,0), (0,0), (0,0)]
 
 
-
-
 historyFrames = 3 #adjust for number of frames in intersection history
 bounceNum = 2 #adjust for number of predicted bounces
-historyTolerance = 10 #adjust for tolerance in intersection decision (smaller for less detections)
+historyTolerance = 50 #adjust for tolerance in intersection decision (larger for less detections)
 
 class Line:
     def __init__(self, slope, point):
@@ -42,7 +40,6 @@ class Line:
     def findY(self, x):
         return self.m * x + self.b
         
-
     def intersect(self, otherLine):
         if self.m != otherLine.m:
             x = int((otherLine.b - self.b) / (self.m - otherLine.m))
@@ -58,7 +55,6 @@ class Line:
                 
         return newLine
     
-
 def listAverage(intersections):
     newList = [i[1] for i in intersections]
 
@@ -76,8 +72,6 @@ def checkPotential(puck, velocity, path, threshold, top, bottom): #checks if puc
             
             return intersection
 
-
-
 def findBounce(velocity, puck, puckLine, step): #predicts location where puck will strike a wall and bounce towards
 
     if step == bounceNum: #increase to see more collisions
@@ -85,12 +79,12 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
     
     step += 1
 
-    dangerPoint = checkPotential(puck, velocity, puckLine, Line(999, (770, 0)), 0, 540)
+    dangerPoint = checkPotential(puck, velocity, puckLine, Line(999, (770, 0)), 0, 540) #return point where puck might go past line
     if dangerPoint is not None:
 
-        previousIntersections.append(dangerPoint)
+        previousIntersections.append(dangerPoint) #keep track of previouus danger points
 
-        if len(previousIntersections) > historyFrames:
+        if len(previousIntersections) > historyFrames: #only keep track of so many previous intersections
             previousIntersections.pop(0)
 
         temp = [i[1] for i in previousIntersections]
@@ -103,8 +97,8 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
 
             #NEW MOTOR STUFF
             displacement = previousIntersections[-1][1] - previousIntersections[-2][1]
-            #print(displacement)
-            #print(displacement)
+            print(displacement)
+
 
 
     if velocity[0] >= 0 and velocity[1] >= 0: 
@@ -182,28 +176,23 @@ def findBounce(velocity, puck, puckLine, step): #predicts location where puck wi
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(newVelocity, leftIntersect, bounce, step)
             
-      
-
 #defines corners of table (will do this automatically with real camera)
 top = Line(0, (0, 0))
 bottom = Line(0, (0, 540))
 left = Line(999, (150, 0))
 right = Line(999, (770, 0))
 
-
-
 #ASSUME RIGHT SIDE IS ROBOT SIDE
 scoreLine = Line(999, (670, 0))
 
-        
-
 while(True):
     ret, frame = vid.read()
+    if ret == False:
+        break
 
     frame = cv2.resize(frame, (960, 540))
     
 
-    
     if ret == True:
         
         # Convert frame to HSV spectrum, mask using desired color range
@@ -230,7 +219,7 @@ while(True):
 
             moments = cv2.moments(largest_contour)
             if moments["m00"] != 0:
-                centroid = (int(moments["m10"] / moments["m00"]), int(moments["m01"] / moments["m00"]))
+                centroid = (int(moments["m10"] / moments["m00"]), int(moments["m01"] / moments["m00"])) #find center of puck
     
                 
             # Compute velocity and prediction based off of previous frame
@@ -240,8 +229,7 @@ while(True):
 
             #cv2.line(frame, centroid, prediction, (0,255,0), 2)
 
-
-            if velocity[0] != 0:
+            if velocity[0] != 0: #account for divide by 0 error
                 slope = velocity[1]/velocity[0]
             else:
                 slope = 999
@@ -260,6 +248,7 @@ while(True):
     cv2.imshow('Frame', frame)
     #time.sleep(0.04)
     #time.sleep(0.5)
+    #time.sleep(0.2)
 
     if cv2.waitKey(1) == 27:
         break
