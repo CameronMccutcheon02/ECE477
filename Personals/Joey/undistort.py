@@ -12,18 +12,18 @@ def undistortCamera():
     # Arrays to store object points and image points from all the images.
     objpoints = [] # 3d point in real world space
     imgpoints = [] # 2d points in image plane.
-    images = ['calibrationPics\WIN_20231109_14_38_01_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_59_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_56_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_52_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_48_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_45_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_38_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_35_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_24_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_19_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_07_Pro.jpg',
-    'calibrationPics\WIN_20231109_14_37_04_Pro.jpg',]
+    images = ['newCalibrationPics\WIN_20231114_16_17_29_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_17_28_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_17_03_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_17_02_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_16_47_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_16_40_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_16_32_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_16_28_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_16_17_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_16_10_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_16_07_Pro.jpg',
+'newCalibrationPics\WIN_20231114_16_16_05_Pro.jpg']
     for fname in images:
         img = cv.imread(fname)
         gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
@@ -42,7 +42,7 @@ def undistortCamera():
 
     ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1],None,None)
 
-    img = cv.imread('calibrationPics\WIN_20231109_14_37_07_Pro.jpg')
+    img = cv.imread('newCalibrationPics\WIN_20231114_16_16_05_Pro.jpg')
     h,  w = img.shape[:2]
     newcameramtx, roi=cv.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
 
@@ -54,8 +54,11 @@ def undistortCamera():
     dst = dst[y:y+h, x:x+w]
     cv.imwrite('calibresult.png',dst)
 
-    cv.imshow('original', cv.imread('calibrationPics\WIN_20231109_14_37_07_Pro.jpg'))
+    cv.imshow('original', cv.imread('newCalibrationPics\WIN_20231114_16_16_05_Pro.jpg'))
     cv.imshow('fixed', dst)
     cv.waitKey(50000)
 
     cv.destroyAllWindows()
+
+if __name__ == '__main__':
+    undistortCamera()
