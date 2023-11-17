@@ -29,7 +29,7 @@ def serial_write(ser, data):
     ser.flush()
     data_to_send = str(data)
     while(len((data_to_send)) < 4):
-        data_to_send = "0" + data_to_send
+        data_to_send = data_to_send + "0"
     data_to_send = data_to_send.encode("ascii")
     print(data_to_send)
     ser.write(data_to_send)

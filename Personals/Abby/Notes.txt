@@ -9,3 +9,9 @@ To-do:
 - add other motor to stm
 - 3D print motor mounts
 - re-print new funnel design
+
+	TIM1->CCR1 = 100;
+	TIM1->ARR = 200;
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	HAL_Delay(100);
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
