@@ -1,6 +1,5 @@
 import cv2
 import math
-import time
 
 class Line: #used for trajectory
     def __init__(self, slope, point):
@@ -55,7 +54,6 @@ def findObject(frame, low_color, high_color): #finds object of given color
     else:
         return None
             
-
 def findBounce(frame, velocity, puck, puckLine, step): #predicts location where puck will strike a wall and bounce towards
 
     top = Line(0, (0, 30))
@@ -174,7 +172,6 @@ def move(ser, destination, currentPosition):
         serial_write(ser, 'left')
     elif x == 0 and y == 0:
         serial_write(ser, 'stay')
-
 
 def serial_write(ser, data):
     ser.flush()
