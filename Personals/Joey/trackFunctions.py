@@ -1,5 +1,6 @@
 import cv2
 import math
+import time
 
 class Line: #used for trajectory
     def __init__(self, slope, point):
@@ -41,23 +42,26 @@ def findObject(frame, low_color, high_color): #finds object of given color
     if len(contours) > 0:
         # Find largest contour, draw bounding box, find center
         largest_contour = max(contours, key=cv2.contourArea)
-        if cv2.contourArea(largest_contour) < 700:
-            return
+        if cv2.contourArea(largest_contour) < 200:
+            return None
         
         x, y, w, h = cv2.boundingRect(largest_contour)
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3) #rectangle around object
 
         moments = cv2.moments(largest_contour)   
         centroid = (int(moments["m10"] / (moments["m00"] + 1e-5)), int(moments["m01"] / (moments["m00"] + 1e-5))) #find center of object
+        return centroid
+
+    else:
+        return None
             
-    return centroid
 
 def findBounce(frame, velocity, puck, puckLine, step): #predicts location where puck will strike a wall and bounce towards
 
-    top = Line(0, (0, 0))
-    bottom = Line(0, (0, 540))
-    left = Line(999, (150, 0))
-    right = Line(999, (770, 0))
+    top = Line(0, (0, 30))
+    bottom = Line(0, (0, 440))
+    left = Line(999, (90, 0))
+    right = Line(999, (900, 0))
 
     if step == 0: #increase to see more collisions
         return
@@ -138,4 +142,47 @@ def findBounce(frame, velocity, puck, puckLine, step): #predicts location where 
             bounce = puckLine.reflection(left)
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(frame, newVelocity, leftIntersect, bounce, step)
+
+def move(ser, destination, currentPosition):
+    #          up
+    #          -
+    #      ul  -    ur
+    # left-----0+++++++righ
+    #      dr  +    dr
+    #          +
+    #         down
+    
+    distance = (destination[0] - currentPosition[0], destination[1] - currentPosition[1])
+    x = distance[0]
+    y = distance[1]
+
+    if x >0 and y > 0:
+        serial_write(ser, 'dr')
+    elif x > 0 and y < 0:
+        serial_write(ser, 'ur')
+    elif x < 0 and y > 0:
+        serial_write(ser, 'dl')
+    elif x < 0 and y < 0:
+        serial_write(ser, 'ul')
+    elif x == 0 and y > 0:
+        serial_write(ser, 'down')
+    elif x == 0 and y < 0:
+        serial_write(ser, 'up')
+    elif x > 0 and y == 0:
+        serial_write(ser, 'righ')
+    elif x < 0 and y == 0:
+        serial_write(ser, 'left')
+    elif x == 0 and y == 0:
+        serial_write(ser, 'stay')
+
+
+def serial_write(ser, data):
+    ser.flush()
+    data_to_send = str(data)
+    while(len((data_to_send)) < 4):
+        data_to_send = data_to_send + "0"
+    data_to_send = data_to_send.encode("ascii")
+    print(data_to_send)
+    ser.write(data_to_send)
+
 
