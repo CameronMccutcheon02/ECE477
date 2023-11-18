@@ -1,5 +1,6 @@
 import cv2
 import math
+import time
 
 class Line: #used for trajectory
     def __init__(self, slope, point):
@@ -149,29 +150,83 @@ def move(ser, destination, currentPosition):
     #      dr  +    dr
     #          +
     #         down
+
+    leftLimit = 700 #650
+    rightLimit = 835 #885
+    topLimit = 105 #55
+    bottomLimit = 380 #430
     
+    #check to make sure mallet is not nearing left or right edge
+    if currentPosition[0] not in range(leftLimit, rightLimit):
+        # serial_write(ser, '0')
+
+        if currentPosition[0] < leftLimit:
+            serial_write(ser, 'righ')
+            time.sleep(0.5)
+
+        if currentPosition[0] > rightLimit:
+            serial_write(ser, 'left')
+            time.sleep(0.5)
+
+        # print('STOP')
+        return
+    
+    #check to make sure mallet is not nearing top or bottom edge
+    if currentPosition[1] not in range(topLimit, bottomLimit):
+        # serial_write(ser, '0')
+
+        if currentPosition[1] < topLimit:
+            serial_write(ser, 'down')
+            time.sleep(0.5)
+
+        if currentPosition[1] > bottomLimit:
+            serial_write(ser, 'up')
+            time.sleep(0.5)
+
+        # print('STOP')
+        return
+    
+
+    #if puck is on left side of table
+    if destination[0] < 495:
+        move(ser, (820, 245), currentPosition)
+        return
+    
+
+
+
     distance = (destination[0] - currentPosition[0], destination[1] - currentPosition[1])
     x = distance[0]
     y = distance[1]
+    tolerance = 20
 
-    if x >0 and y > 0:
+    if x > tolerance and y > tolerance:
         serial_write(ser, 'dr')
-    elif x > 0 and y < 0:
+        # print('dr')
+    elif x > tolerance and y < -1*tolerance:
         serial_write(ser, 'ur')
-    elif x < 0 and y > 0:
+        # print('ur')
+    elif x < -1*tolerance and y > tolerance:
         serial_write(ser, 'dl')
-    elif x < 0 and y < 0:
+        # print('dl')
+    elif x < -1*tolerance and y < -1*tolerance:
         serial_write(ser, 'ul')
-    elif x == 0 and y > 0:
+        # print('ul')
+    elif y > tolerance and x < tolerance and x > -1*tolerance :
         serial_write(ser, 'down')
-    elif x == 0 and y < 0:
+        # print('down')
+    elif y < -1*tolerance and x < tolerance and x > -1*tolerance:
         serial_write(ser, 'up')
-    elif x > 0 and y == 0:
+        # print('up')
+    elif x > tolerance and y < tolerance and y > -1*tolerance:
         serial_write(ser, 'righ')
-    elif x < 0 and y == 0:
+        # print('righ')
+    elif x < -1*tolerance and y < tolerance and y > -1*tolerance:
         serial_write(ser, 'left')
-    elif x == 0 and y == 0:
+        # print('left')
+    else:
         serial_write(ser, 'stay')
+        # print('stay')
 
 def serial_write(ser, data):
     ser.flush()

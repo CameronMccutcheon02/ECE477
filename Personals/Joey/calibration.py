@@ -4,7 +4,7 @@ import numpy as np
 
 # shape is (row, column, (bgr))
 def findRange(frame):
-    difference = 30
+    difference = 20
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     shape = frame.shape
     color = frame[int(shape[0]/2), int(shape[1]/2)]
