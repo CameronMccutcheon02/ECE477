@@ -1,0 +1,84 @@
+!SESSION 2023-11-07 21:29:34.261 -----------------------------------------------
+eclipse.buildId=Version 1.13.2
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-11-07 21:30:09.225
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-11-07 21:30:09.235
+!MESSAGE Log4j2 initialized with config file C:\Users\halus\ECE477\Software\7seg Code\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-11-07 21:30:25.775
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.ui.workbench 4 2 2023-11-07 21:30:32.821
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.ui.workbench".
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "com.st.stm32cube.ide.mcu.externaltools.MCUExternalToolsPlugin.isDebugging()" because the return value of "com.st.stm32cube.ide.mcu.externaltools.MCUExternalToolsPlugin.getDefault()" is null
+	at com.st.stm32cube.ide.mcu.externaltools.MCUExternalToolsPlugin.isDebuggingStatic(MCUExternalToolsPlugin.java:177)
+	at com.st.stm32cube.ide.mcu.externaltools.internal.registry.MCUExternalToolsTool.resolvePath(MCUExternalToolsTool.java:124)
+	at com.st.stm32cube.ide.mcu.externaltools.internal.registry.MCUExternalToolsTool.getLocation(MCUExternalToolsTool.java:267)
+	at com.st.stm32cube.ide.mcu.externaltools.internal.registry.MCUExternalToolsRegistry.getToolPath(MCUExternalToolsRegistry.java:235)
+	at com.st.stm32cube.ide.mcu.externaltools.internal.registry.MCUExternalToolsRegistry.getToolPath(MCUExternalToolsRegistry.java:223)
+	at com.st.stm32cube.ide.mcu.externaltools.internal.registry.MCUExternalToolsRegistry.getCubeProgrammerLocation(MCUExternalToolsRegistry.java:277)
+	at com.st.stm32cube.ide.mcu.externaltools.MCUExternalToolsPlugin.getCubeProgrammerLocation(MCUExternalToolsPlugin.java:115)
+	at com.st.stm32cube.ide.mcu.ide.core.ExternalToolsProvider.getCubeProgrammerLocation(ExternalToolsProvider.java:21)
+	at com.st.stm32cube.common.mx.core.CubeMxInstance.<init>(CubeMxInstance.java:154)
+	at com.st.stm32cube.common.mx.core.CubeMxInstance.getInstance(CubeMxInstance.java:91)
+	at com.st.stm32cube.common.mx.userauth.UserAuthAdapter.<init>(UserAuthAdapter.java:18)
+	at com.st.stm32cube.common.mx.userauth.UserAuthProvider.getUserAuthAdapter(UserAuthProvider.java:9)
+	at com.st.stm32cube.common.ecosystemintegration.ui.core.MCUEcoSystemIntegrationUiHelper.getUserAuth(MCUEcoSystemIntegrationUiHelper.java:100)
+	at com.st.stm32cube.ide.mcu.userauth.UserAuthStartup.earlyStartup(UserAuthStartup.java:41)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:79)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:55)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.Workbench$39.run(Workbench.java:2656)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 4 2 2023-11-07 21:30:32.823
+!MESSAGE An internal error occurred during: "Executing the early startup extensions".
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.equinox.log.Logger.log(Object, int, String, java.lang.Throwable)" because "this.logger" is null
+	at org.eclipse.core.internal.runtime.Log.log(Log.java:68)
+	at org.eclipse.ui.internal.WorkbenchPlugin.log(WorkbenchPlugin.java:743)
+	at org.eclipse.ui.internal.EarlyStartupRunnable.handleException(EarlyStartupRunnable.java:71)
+	at org.eclipse.core.runtime.SafeRunner.handleException(SafeRunner.java:83)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.ui.internal.Workbench$39.run(Workbench.java:2656)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2023-11-13 16:42:52.308 -----------------------------------------------
+eclipse.buildId=Version 1.13.2
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-11-13 16:44:34.156
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-11-13 16:44:34.168
+!MESSAGE Log4j2 initialized with config file C:\Users\halus\ECE477\Software\7seg Code\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-11-13 16:44:40.478
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-11-13 16:47:50.825
+!MESSAGE Indexed '7segment' (19 sources, 81 headers) in 4.75 sec: 4,266 declarations; 24,082 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0071%)
+!SESSION 2023-11-13 19:20:21.739 -----------------------------------------------
+eclipse.buildId=Version 1.13.2
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-11-13 19:21:19.549
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-11-13 19:21:19.551
+!MESSAGE Log4j2 initialized with config file C:\Users\halus\ECE477\Software\7seg Code\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-11-13 19:21:28.044
+!MESSAGE Started RMI Server, listening on port 41337
