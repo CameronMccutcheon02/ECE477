@@ -1,19 +1,9 @@
 import serial 
 import serial.tools.list_ports
 import time
+from serial_comms import setup_serialobject, serial_write
 
-ser = serial.Serial(port="COM3", baudrate=115200, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE, parity=serial.PARITY_NONE, xonxoff=False, rtscts=False, dsrdtr=False) # xonxoff=False, rtscts=False, dsrdtr=False) #, 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
-while(1):
-    ser.flush()
-    data_to_send = input("enter data: ")
-    while(len((data_to_send)) < 4):
-        data_to_send = data_to_send + "0" 
-    data_to_send = data_to_send.encode("ascii")
-    print(data_to_send)
-    ser.write(data_to_send)
-    time.sleep(.1)
-
-'''
+ser = setup_serialobject()
 list = ["-1", "1"]
 i = 0
 while i < 10:
@@ -24,6 +14,7 @@ while i < 10:
         time.sleep(.025)
     i = i + 1
 
+'''
 ser = serial.Serial(port="COM6", baudrate=115200, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE, parity=serial.PARITY_NONE, xonxoff=False, rtscts=False, dsrdtr=False) # xonxoff=False, rtscts=False, dsrdtr=False) #, 115200, timeout=None, xonxoff=False, rtscts=False, dsrdtr=False)
 ser.close()
 ser.open()
