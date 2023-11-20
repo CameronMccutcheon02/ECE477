@@ -142,7 +142,7 @@ def findBounce(frame, velocity, puck, puckLine, step): #predicts location where 
             newVelocity = (-1 * velocity[0], velocity[1])
             findBounce(frame, newVelocity, leftIntersect, bounce, step)
 
-def move(ser, destination, currentPosition):
+def move(ser, destination, currentPosition, prevInstruction):
     #          up
     #          -
     #      ul  -    ur
@@ -155,18 +155,23 @@ def move(ser, destination, currentPosition):
     rightLimit = 835 #885
     topLimit = 105 #55
     bottomLimit = 380 #430
+    sleepyTime = 0.25
     
     #check to make sure mallet is not nearing left or right edge
     if currentPosition[0] not in range(leftLimit, rightLimit):
         # serial_write(ser, '0')
 
         if currentPosition[0] < leftLimit:
+            if prevInstruction == 'righ': return prevInstruction
             serial_write(ser, 'righ')
-            time.sleep(0.5)
+            return 'righ'
+            # time.sleep(sleepyTime)
 
         if currentPosition[0] > rightLimit:
+            if prevInstruction == 'left': return prevInstruction
             serial_write(ser, 'left')
-            time.sleep(0.5)
+            return 'left'
+            # time.sleep(sleepyTime)
 
         # print('STOP')
         return
@@ -176,20 +181,26 @@ def move(ser, destination, currentPosition):
         # serial_write(ser, '0')
 
         if currentPosition[1] < topLimit:
+            if prevInstruction == 'down': return prevInstruction
             serial_write(ser, 'down')
-            time.sleep(0.5)
+            return 'down'
+            # time.sleep(sleepyTime)
 
         if currentPosition[1] > bottomLimit:
+            if prevInstruction == 'up': return prevInstruction
             serial_write(ser, 'up')
-            time.sleep(0.5)
+            return 'up'
+            # time.sleep(sleepyTime)
 
         # print('STOP')
         return
     
 
+    
+
     #if puck is on left side of table
     if destination[0] < 495:
-        move(ser, (820, 245), currentPosition)
+        prevInstruction = move(ser, (820, destination[1]), currentPosition, prevInstruction)
         return
     
 
@@ -201,31 +212,49 @@ def move(ser, destination, currentPosition):
     tolerance = 20
 
     if x > tolerance and y > tolerance:
+        if prevInstruction == 'dr': return prevInstruction
         serial_write(ser, 'dr')
+        return 'dr'
         # print('dr')
     elif x > tolerance and y < -1*tolerance:
+        if prevInstruction == 'ur': return prevInstruction
         serial_write(ser, 'ur')
+        return 'ur'
         # print('ur')
     elif x < -1*tolerance and y > tolerance:
+        if prevInstruction == 'dl': return prevInstruction
         serial_write(ser, 'dl')
+        return 'dl'
         # print('dl')
     elif x < -1*tolerance and y < -1*tolerance:
+        if prevInstruction == 'ul': return prevInstruction
         serial_write(ser, 'ul')
+        return 'ul'
         # print('ul')
     elif y > tolerance and x < tolerance and x > -1*tolerance :
+        if prevInstruction == 'down': return prevInstruction
         serial_write(ser, 'down')
+        return 'down'
         # print('down')
     elif y < -1*tolerance and x < tolerance and x > -1*tolerance:
+        if prevInstruction == 'up': return prevInstruction
         serial_write(ser, 'up')
+        return 'up'
         # print('up')
     elif x > tolerance and y < tolerance and y > -1*tolerance:
+        if prevInstruction == 'righ': return prevInstruction
         serial_write(ser, 'righ')
+        return 'righ'
         # print('righ')
     elif x < -1*tolerance and y < tolerance and y > -1*tolerance:
+        if prevInstruction == 'left': return prevInstruction
         serial_write(ser, 'left')
+        return 'left'
         # print('left')
     else:
+        if prevInstruction == 'stay': return prevInstruction
         serial_write(ser, 'stay')
+        return 'stay'
         # print('stay')
 
 def serial_write(ser, data):
