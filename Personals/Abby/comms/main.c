@@ -6,8 +6,8 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
+  * Copyup (c) 2023 STMicroelectronics.
+  * All ups reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
   * in the root directory of this software component.
@@ -18,38 +18,14 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
+#include <stdio.h>
+#include <string.h>
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
-
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_rx;
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -60,17 +36,18 @@ static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM2_Init(void);
 
+void down();
+void up();
 void left();
-void right();
-void forward();
-void backward();
-void lf();
-void rb();
-void lb();
-void rf();
+void righ();
+void dl();
+void ur();
+void dr();
+void ul();
 
 /* USER CODE BEGIN PFP */
 uint8_t rxdata[4];
+uint8_t rxdata_prev[4];
 uint8_t IR_beam[14];
 uint8_t score_read[10];
 uint8_t player1score;
@@ -84,21 +61,19 @@ int arr_range;
 int arr_value;
 char *sign;//variable to dictate if the PC data is negative or positive
 int pulses;//number of steps specified by PC
-
+int target_ccr_acc = 100; //100
+int target_ccr_dec = 350;
+int starting_ccr = 250; //300
+uint8_t test_ccr[10];
+int down_flag=0;
+int up_flag=0;
 int left_flag=0;
-int right_flag=0;
-int forward_flag=0;
-int backward_flag=0;
-int lf_flag=0;
-int rb_flag=0;
-int lb_flag=0;
-int rf_flag=0;
+int righ_flag=0;
+int dl_flag=0;
+int ur_flag=0;
+int dr_flag=0;
+int ul_flag=0;
 /* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -106,25 +81,12 @@ int rf_flag=0;
   */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  /* Reset of all peripherals, Initializes the Flash inteulace and the Systick. */
   HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
@@ -133,23 +95,29 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM3_Init();
   MX_TIM2_Init();
+  HAL_TIM_Base_Start_IT(&htim3);
+
   /* USER CODE BEGIN 2 */
   HAL_UART_Receive_DMA(&huart2, rxdata, sizeof(rxdata));
 
   HAL_Delay(3000);
-
+  TIM1->CCR1 = 175;
+  TIM1->CCR3 = 175;
+  TIM1->ARR = 350;
+  HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(left_flag){left();}
-	  if(right_flag){right();}
-	  if(forward_flag){forward();}
-	  if(backward_flag){backward();}
-	  if(lf_flag){lf();}
-	  if(rb_flag){rb();}
-	  if(lb_flag){lb();}
-	  if(rf_flag){rf();}
+	  if(down_flag){down();}
+	  else if(up_flag){up();}
+	  else if(left_flag){left();}
+	  else if(righ_flag){righ();}
+	  else if(dl_flag){dl();}
+	  else if(ur_flag){ur();}
+	  else if(dr_flag){dr();}
+	  else if(ul_flag){ul();}
   }
   /* USER CODE END 3 */
 }
@@ -294,9 +262,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 0;
+  htim2.Init.Prescaler = 7;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 4294967295;
+  htim2.Init.Period = 45000;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -341,7 +309,7 @@ static void MX_TIM3_Init(void)
   htim3.Instance = TIM3;
   htim3.Init.Prescaler = 7;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 2000;
+  htim3.Init.Period = 40000;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
@@ -564,123 +532,120 @@ int map_speed(int speed_data)
 	return(arr_value);
 }
 
+void down()
+{
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
+	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), SET);
+	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), SET);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+	down_flag=0;
+	//uint32_t time = pulses * .4; // * 0.4 * 1000;	//time in s
+
+}
+
+void up()
+{
+
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
+	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), RESET);
+	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), RESET);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+	up_flag=0;
+	//uint32_t time = pulses * .4; // * 0.4 * 1000;	//time in s
+
+}
+
 void left()
 {
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), SET);
-	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), SET);
+	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), RESET);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	HAL_Delay(1000);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
 	left_flag=0;
-	//uint32_t time = pulses * .4; // * 0.4 * 1000;	//time in s
-
 }
 
-void right()
-{
-	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), RESET);
-	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), RESET);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	HAL_Delay(1000);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
-	right_flag=0;
-	//uint32_t time = pulses * .4; // * 0.4 * 1000;	//time in s
-
-}
-
-void forward()
-{
-	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), SET);
-	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), RESET);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	HAL_Delay(1000);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
-	forward_flag=0;
-}
-
-void backward()
+void righ()
 {
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), RESET);
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), SET);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	HAL_Delay(1000);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
-	backward_flag=0;
+	righ_flag=0;
 }
 
-void lf()
+void dl()
 {
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), SET);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	HAL_Delay(1000);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-	lf_flag=0;
+	dl_flag=0;
 }
 
-void rb()
+void ur()
 {
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_9), RESET);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	HAL_Delay(1000);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-	rb_flag=0;
+	ur_flag=0;
 }
 
-void lb()
+void dr()
 {
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), SET);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	HAL_Delay(1000);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
-	lb_flag=0;
+	dr_flag=0;
 }
 
-void rf()
+void ul()
 {
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
 	HAL_GPIO_WritePin(GPIOA, (GPIO_PIN_11), RESET);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	HAL_Delay(1000);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
-	rf_flag=0;
+	ul_flag=0;
 }
 
+void reset_and_accelerate()
+{
+	//HAL_TIM_Base_Start_IT(&htim2);
+	starting_ccr = 350;
+	TIM1->CCR1 = (0.5) * starting_ccr;
+	TIM1->CCR3 = (0.5) * starting_ccr;
+	TIM1->ARR = starting_ccr;
+}
 /* USER CODE BEGIN 4 */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed callback
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed caldrack
 {
 	UNUSED(huart);
-
-	if(strstr(rxdata, "left")){
+	HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);
+	reset_and_accelerate();
+	if(strstr(rxdata, "down")){
+		down_flag=1;
+	}
+	else if(strstr(rxdata, "up00")){
+		up_flag=1;
+	}
+	else if(strstr(rxdata, "left")){
 		left_flag=1;
 	}
 	else if(strstr(rxdata, "righ")){
-		HAL_UART_Transmit(&huart2, rxdata, sizeof(rxdata), 100);
-		right_flag=1;
+		righ_flag=1;
 	}
-	else if(strstr(rxdata, "forw")){
-		forward_flag=1;
+	else if(strstr(rxdata, "dl00")){
+		dl_flag=1;
 	}
-	else if(strstr(rxdata, "back")){
-		backward_flag=1;
+	else if(strstr(rxdata, "ul00")){
+		ul_flag=1;
 	}
-	else if(strstr(rxdata, "lf00")){
-		lf_flag=1;
+	else if(strstr(rxdata, "dr00")){
+		dr_flag=1;
 	}
-	else if(strstr(rxdata, "rf00")){
-		rf_flag=1;
-	}
-	else if(strstr(rxdata, "lb00")){
-		lb_flag=1;
-	}
-	else if(strstr(rxdata, "rb00")){
-		rb_flag=1;
+	else if(strstr(rxdata, "ur00")){
+		ur_flag=1;
 	}
 	else{
 		HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
@@ -689,6 +654,32 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed 
 }
 /* USER CODE END 4 */
 
+// Callback: timer has rolled over
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  // Check which version of the timer triggered this callback and toggle LED
+  if (htim == &htim3)
+  {
+	if(starting_ccr > target_ccr_acc)
+	{
+		starting_ccr = starting_ccr * .9;
+		TIM1->CCR1 = (0.5) * starting_ccr;
+		TIM1->CCR3 = (0.5) * starting_ccr;
+		TIM1->ARR = starting_ccr;
+	}
+  }
+  /*
+  else if (htim == &htim2)
+  {
+	  if(starting_ccr < target_ccr_dec)
+		starting_ccr = starting_ccr * 1.1;
+		TIM1->CCR1 = (0.5) * starting_ccr;
+		TIM1->CCR3 = (0.5) * starting_ccr;
+		TIM1->ARR = starting_ccr;
+  }
+  */
+}
+/* USER CODE END 4 */
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None
