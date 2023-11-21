@@ -1,42 +1,16 @@
--------------- WEEK 13 PROGRESS ------------- 
+-------------- WEEK 14 PROGRESS ------------- 
 Notes:
-- 7 segment display progress
-    - we have an issue with the LED driver or with the code
-        - when i try to turn off the larger segments, they remain powered with ~ 3V. i can power off the smaller segments, but something is leaving the larger segments powered. 
-            - this has interfered with 7seg progress because i cannot control one display at a time due to the larger segments remaining powered
-                - john will help me tues
-    - we realized that the pull up resistors do not actually solve the original problem - so we need to switch our method
-        - we will either use John's PCB 
-        - i am going to prototype with just HC595s and have it dim so i can write the code
-- main PCB  
-    - soldered other headers and reset button
-    - uploaded code to run two motors
-    - soldered extenders to IR sensors
-    - attached motor wires to connectors
+- troubleshooting motors
+    - it looks like the Nema23 can handle 3A? look into upping the current by driver switch settings
+    - Nema23 seem to often be powered off of 48V 
+    - test with different steps/rev settings ?
+    
 
 - hours
-    - mon: 2
-        - 7 segment and 3d printing
-        - 3d printed better L brackets
-        - updated stm script for 7 segment
-    - tues: 5
-        - soldered, wiring/packaging, pcb, code
-    - wed: 4
-        - wired underneath table, got motors running off of pcb
-    - thurs: 4
-        - went to jordan's office, emailed him and made a plan. emailed Angela to figure out where our spot will be
-        - finish soldering pcb and headers
-        - soldered a UART protoboard to connect to main pcb
-        - uploaded looped code to have robot move back and forth
-    - fri: 2
+    - fri: 2 (starting integration)
+    - sat: 8 w joey this sucked (troubleshooting camera w motors / motor problem)
+    - sun: 2 (worked on keys code + troubleshooting + research into motors)
+    - mon
 
 To-do:
-- integrate 7 segment with stm (by wed)
-- ask jordan about moving table for spark challenge (tues)
-- update website (thurs)
-
-	TIM1->CCR1 = 100;
-	TIM1->ARR = 200;
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	HAL_Delay(100);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+- troubleshoo
