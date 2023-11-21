@@ -37,6 +37,18 @@ if __name__ == '__main__':
             break
 
         frame = cv2.resize(frame, (960, 540))
+
+        # leftLimit = 650 #700
+        # rightLimit = 865 #835
+        # topLimit = 75 #105
+        # bottomLimit = 420 #380
+
+        # cv2.line(frame, (leftLimit, topLimit), (leftLimit, bottomLimit), (255, 0, 0), 10)
+        # cv2.line(frame, (rightLimit, topLimit), (rightLimit, bottomLimit), (255, 0, 0), 10)
+        # cv2.line(frame, (leftLimit, topLimit), (rightLimit, topLimit), (255, 0, 0), 10)
+        # cv2.line(frame, (leftLimit, bottomLimit), (rightLimit, bottomLimit), (255, 0, 0), 10)
+
+
                
         puck_location = findObject(frame, low_puck, high_puck)
         if not puck_location: puck_location = old_puck_location
