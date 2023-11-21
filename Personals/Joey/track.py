@@ -28,6 +28,8 @@ if __name__ == '__main__':
     mallet_location = (0, 0)
     old_mallet_location = (0, 0)
 
+    prevInstruction = '0'
+    
     while(True):
 
         ret, frame = vid.read()
@@ -43,7 +45,7 @@ if __name__ == '__main__':
         if not mallet_location: mallet_location = old_mallet_location
 
 
-        move(ser, puck_location, mallet_location)
+        prevInstruction = move(ser, puck_location, mallet_location, prevInstruction)
 
         # Compute velocity and prediction based off of previous frame
         velocity = (puck_location[0] - old_puck_location[0], puck_location[1] - old_puck_location[1])
@@ -70,10 +72,10 @@ if __name__ == '__main__':
         # cv2.line(frame, (850, 55), (850, 430), (255, 0, 0), 5) #right
                 
         cv2.imshow('Frame', frame)
-        time.sleep(0.04)
+
 
         if cv2.waitKey(1) == 27:
-            serial_write(ser, '0')
+            # serial_write(ser, '0')
             break
 
     vid.release()
