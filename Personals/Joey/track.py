@@ -48,6 +48,8 @@ if __name__ == '__main__':
         # cv2.line(frame, (leftLimit, topLimit), (rightLimit, topLimit), (255, 0, 0), 10)
         # cv2.line(frame, (leftLimit, bottomLimit), (rightLimit, bottomLimit), (255, 0, 0), 10)
 
+        # cv2.line(frame, (600, 0), (600, 500), (255, 0, 0), 5)
+
 
                
         puck_location = findObject(frame, low_puck, high_puck)
@@ -58,6 +60,7 @@ if __name__ == '__main__':
 
 
         prevInstruction = move(ser, puck_location, mallet_location, prevInstruction)
+
 
         # Compute velocity and prediction based off of previous frame
         velocity = (puck_location[0] - old_puck_location[0], puck_location[1] - old_puck_location[1])

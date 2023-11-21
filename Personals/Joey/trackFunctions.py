@@ -178,32 +178,32 @@ def shadow(ser, destination, currentPosition, prevInstruction):
     #     # print('STOP')
     #     return
     
-    #check to make sure mallet is not nearing top or bottom edge
-    if currentPosition[1] not in range(topLimit, bottomLimit):
-        serial_write(ser, '0')
-        #time.sleep(1)
+    # #check to make sure mallet is not nearing top or bottom edge
+    # if currentPosition[1] not in range(topLimit, bottomLimit):
+    #     serial_write(ser, '0')
+    #     #time.sleep(1)
 
-        if currentPosition[1] < topLimit:
-            if prevInstruction == 'down': return prevInstruction
-            serial_write(ser, 'down')
-            time.sleep(sleepyTime)
-            return 'down'
-
-
-        if currentPosition[1] > bottomLimit:
-            if prevInstruction == 'up': return prevInstruction
-            serial_write(ser, 'up')
-            time.sleep(sleepyTime)
-            return 'up'
+    #     if currentPosition[1] < topLimit:
+    #         if prevInstruction == 'down': return prevInstruction
+    #         serial_write(ser, 'down')
+    #         time.sleep(sleepyTime)
+    #         return 'down'
 
 
-        # print('STOP')
-        return
+    #     if currentPosition[1] > bottomLimit:
+    #         if prevInstruction == 'up': return prevInstruction
+    #         serial_write(ser, 'up')
+    #         time.sleep(sleepyTime)
+    #         return 'up'
+
+
+    #     # print('STOP')
+    #     return
     
     distance = (destination[0] - currentPosition[0], destination[1] - currentPosition[1])
     x = distance[0]
     y = distance[1]
-    tolerance = 10
+    tolerance = 20
 
     if x > tolerance and y > tolerance:
         if prevInstruction == 'dr': return prevInstruction
@@ -266,54 +266,54 @@ def move(ser, destination, currentPosition, prevInstruction):
     bottomLimit = 420 #380
     sleepyTime = 0.5
     
-    #check to make sure mallet is not nearing left or right edge
-    if currentPosition[0] not in range(leftLimit, rightLimit):
-        # serial_write(ser, '0')
+    # #check to make sure mallet is not nearing left or right edge
+    # if currentPosition[0] not in range(leftLimit, rightLimit):
+    #     # serial_write(ser, '0')
 
-        if currentPosition[0] < leftLimit:
-            if prevInstruction == 'righ': return prevInstruction
-            serial_write(ser, 'righ')
-            time.sleep(sleepyTime)
-            return 'righ'
+    #     if currentPosition[0] < leftLimit:
+    #         if prevInstruction == 'righ': return prevInstruction
+    #         serial_write(ser, 'righ')
+    #         time.sleep(sleepyTime)
+    #         return 'righ'
             
 
-        if currentPosition[0] > rightLimit:
-            if prevInstruction == 'left': return prevInstruction
-            serial_write(ser, 'left')
-            time.sleep(sleepyTime)
-            return 'left'
+    #     if currentPosition[0] > rightLimit:
+    #         if prevInstruction == 'left': return prevInstruction
+    #         serial_write(ser, 'left')
+    #         time.sleep(sleepyTime)
+    #         return 'left'
             
 
-        # print('STOP')
-        return
+    #     # print('STOP')
+    #     return
     
-    #check to make sure mallet is not nearing top or bottom edge
-    if currentPosition[1] not in range(topLimit, bottomLimit):
-        # serial_write(ser, '0')
+    # #check to make sure mallet is not nearing top or bottom edge
+    # if currentPosition[1] not in range(topLimit, bottomLimit):
+    #     # serial_write(ser, '0')
 
-        if currentPosition[1] < topLimit:
-            if prevInstruction == 'down': return prevInstruction
-            serial_write(ser, 'down')
-            time.sleep(sleepyTime)
-            return 'down'
-
-
-        if currentPosition[1] > bottomLimit:
-            if prevInstruction == 'up': return prevInstruction
-            serial_write(ser, 'up')
-            time.sleep(sleepyTime)
-            return 'up'
+    #     if currentPosition[1] < topLimit:
+    #         if prevInstruction == 'down': return prevInstruction
+    #         serial_write(ser, 'down')
+    #         time.sleep(sleepyTime)
+    #         return 'down'
 
 
-        # print('STOP')
-        return
+    #     if currentPosition[1] > bottomLimit:
+    #         if prevInstruction == 'up': return prevInstruction
+    #         serial_write(ser, 'up')
+    #         time.sleep(sleepyTime)
+    #         return 'up'
+
+
+    #     # print('STOP')
+    #     return
     
 
     
 
     #if puck is on left side of table
-    if destination[0] < 495:
-        prevInstruction = shadow(ser, (830, destination[1]), currentPosition, prevInstruction)
+    if destination[0] < 600:
+        prevInstruction = shadow(ser, (860, destination[1]), currentPosition, prevInstruction)
         return prevInstruction
     
 
