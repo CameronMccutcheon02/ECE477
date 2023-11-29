@@ -21,9 +21,9 @@
 #include <stdio.h>
 #include <string.h>
 /* Private variables ---------------------------------------------------------*/
-TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim2;
-TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim1;	//motors
+TIM_HandleTypeDef htim2;	//decelerate
+TIM_HandleTypeDef htim3;	//accelerate
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_rx;
 
@@ -36,6 +36,7 @@ static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM2_Init(void);
 
+//Function Definitions
 void down();
 void up();
 void left();
@@ -73,6 +74,7 @@ int dl_flag=0;
 int ur_flag=0;
 int dr_flag=0;
 int ul_flag=0;
+int stop_motors_flag = 0;
 /* USER CODE END PFP */
 
 /**
@@ -118,6 +120,12 @@ int main(void)
 	  else if(ur_flag){ur();}
 	  else if(dr_flag){dr();}
 	  else if(ul_flag){ul();}
+
+	  if(stop_motors_flag){
+		  HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+		  HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
+		  stop_motors_flag = 0;
+	  }
   }
   /* USER CODE END 3 */
 }
@@ -264,7 +272,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 7;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 45000;
+  htim2.Init.Period = 40000;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -625,31 +633,41 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)	//rx transfer completed 
 	reset_and_accelerate();
 	if(strstr(rxdata, "down")){
 		down_flag=1;
+
 	}
 	else if(strstr(rxdata, "up00")){
 		up_flag=1;
+
 	}
 	else if(strstr(rxdata, "left")){
 		left_flag=1;
+
 	}
 	else if(strstr(rxdata, "righ")){
 		righ_flag=1;
+
 	}
 	else if(strstr(rxdata, "dl00")){
 		dl_flag=1;
+
 	}
 	else if(strstr(rxdata, "ul00")){
 		ul_flag=1;
+
 	}
 	else if(strstr(rxdata, "dr00")){
 		dr_flag=1;
+
 	}
 	else if(strstr(rxdata, "ur00")){
 		ur_flag=1;
+
 	}
 	else{
+
 		HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
 		HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
+
 	}
 }
 /* USER CODE END 4 */
@@ -668,16 +686,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		TIM1->ARR = starting_ccr;
 	}
   }
-  /*
-  else if (htim == &htim2)
-  {
-	  if(starting_ccr < target_ccr_dec)
-		starting_ccr = starting_ccr * 1.1;
-		TIM1->CCR1 = (0.5) * starting_ccr;
-		TIM1->CCR3 = (0.5) * starting_ccr;
-		TIM1->ARR = starting_ccr;
-  }
-  */
+
+//  else if (htim == &htim2)
+//  {
+//	  if (starting_ccr < target_ccr_dec)
+//	  {
+//		  starting_ccr = starting_ccr * 1.1;
+//		  TIM1->CCR1 = (0.5) * starting_ccr;
+//		  TIM1->CCR3 = (0.5) * starting_ccr;
+//		  TIM1->ARR = starting_ccr;
+//	  }
+//	  if (starting_ccr >= target_ccr_dec)
+//	  {
+//		stop_motors_flag = 1;
+//	  }
+//
+//  }
 }
 /* USER CODE END 4 */
 /**
