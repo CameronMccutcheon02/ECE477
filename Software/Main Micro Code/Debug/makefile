@@ -63,8 +63,8 @@ all: main-build
 main-build: MainMicro.elf secondary-outputs
 
 # Tool invocations
-MainMicro.elf MainMicro.map: $(OBJS) $(USER_OBJS) \\NAS01.ITAP.PURDUE.EDU\puhome\My\ Documents\477\ECE477\ fr\ECE477\Software\Main\ Micro\ Code\STM32F091RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "MainMicro.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"\\NAS01.ITAP.PURDUE.EDU\puhome\My Documents\477\ECE477 fr\ECE477\Software\Main Micro Code\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MainMicro.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+MainMicro.elf MainMicro.map: $(OBJS) $(USER_OBJS) C:\Users\colli384\Documents\ECE477\Software\Main\ Micro\ Code\STM32F091RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "MainMicro.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\colli384\Documents\ECE477\Software\Main Micro Code\STM32F091RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MainMicro.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

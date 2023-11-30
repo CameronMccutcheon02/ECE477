@@ -99,6 +99,8 @@ void Error_Handler(void);
 #define Limit_SW3_GPIO_Port GPIOC
 #define Limit_SW4_Pin GPIO_PIN_12
 #define Limit_SW4_GPIO_Port GPIOC
+#define SPI_Latch_Pin GPIO_PIN_4
+#define SPI_Latch_GPIO_Port GPIOB
 #define DIR_IC_Pin GPIO_PIN_6
 #define DIR_IC_GPIO_Port GPIOB
 #define EN_A_Pin GPIO_PIN_7
