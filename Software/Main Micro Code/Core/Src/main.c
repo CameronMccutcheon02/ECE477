@@ -36,9 +36,9 @@ static void MX_SPI1_Init(void);
 
 /* Variable Declaration */
 uint8_t rxdata[4];					//buffer for data sent from PC/camera
-int target_ccr_acc = 200; 			//target CCR value for TIM1 when accelerating (top speed)
-int target_ccr_dec = 600;			//target CCR value for TIM1 when decelerating (lowest speed before stopping)
-int starting_ccr = 250; 			//initial CCR value for TIM1 (starting speed)
+int target_ccr_acc = 250;//300; 			//target CCR value for TIM1 when accelerating (top speed)
+int target_ccr_dec = 450;//600;			//target CCR value for TIM1 when decelerating (lowest speed before stopping)
+int starting_ccr = 350; 			//initial CCR value for TIM1 (starting speed)
 int down_flag=0;
 int up_flag=0;
 int left_flag=0;
@@ -51,8 +51,8 @@ int ir_flag = 0;
 
 //SPI PINS and variables
 const int latchPin = ((uint16_t)0x0010U);		//variable for pulling latchPin high and low
-#define HOLDING_CYCLES 2
-uint8_t segvalue[8] = {0, 0,0,0,0,0,0,0};	//array storing the numbers shown on 7-segment display
+#define HOLDING_CYCLES 0
+uint8_t segvalue[8] = {0,0,0,0,0,0,0,0};	//array storing the numbers shown on 7-segment display
 uint8_t display_select = 0;						//initial display selection (rightmost middle display)
 uint8_t hold = 0;								//used for multiplexing larger displays
 
@@ -170,7 +170,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -337,7 +337,7 @@ static void MX_TIM15_Init(void)
   htim15.Instance = TIM15;
   htim15.Init.Prescaler = 7;
   htim15.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim15.Init.Period = 200;
+  htim15.Init.Period = 400000;
   htim15.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim15.Init.RepetitionCounter = 0;
   htim15.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
@@ -459,17 +459,18 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : IR_Sensor_IO1_Pin */
-  GPIO_InitStruct.Pin = IR_Sensor_IO1_Pin;
+  GPIO_InitStruct.Pin = IR_Sensor_IO1_Pin | IR_Sensor_IO2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(IR_Sensor_IO1_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(IR_Sensor_IO2_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PC7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_7;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+//  /*Configure GPIO pin : PC7 */
+//  GPIO_InitStruct.Pin = GPIO_PIN_7;
+//  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+//  GPIO_InitStruct.Pull = GPIO_PULLUP;
+//  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+//  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : Limit_SW1_Pin Limit_SW2_Pin Limit_SW3_Pin Limit_SW4_Pin */
   GPIO_InitStruct.Pin = Limit_SW1_Pin|Limit_SW2_Pin|Limit_SW3_Pin|Limit_SW4_Pin;
@@ -520,7 +521,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		segvalue[6] = segvalue[6] + 1;
 		}
 	}
-	else if(GPIO_Pin == GPIO_PIN_7)	//IR sensor 2
+	if(GPIO_Pin == GPIO_PIN_7)	//IR sensor 2
 	{
 		if(segvalue[4] >= 9){
 			segvalue[5] = segvalue[5] + 1;
@@ -682,12 +683,9 @@ uint8_t TranslateDigit(int digit) {
 	/* Used in translating decimal digits to bytes to be send over SPI */
 
     //uint8_t segments[10] = {0xfc, 0x60, 0xda, 0xf2, 0x66, 0xb6, 0xbe, 0xe0, 0xfe, 0xf6};
-	uint8_t segments[10] = {0b11111100, 0b01100000, 0b11011010, 0b11110010, 0b01100110, 0b10110110, 0b00111110, 0b11100000, 0b11111110, 0b11100110};
-    if (digit >= 0 && digit <= 9) {
+	uint8_t segments[11] = {0b11111100, 0b01100000, 0b11011010, 0b11110010, 0b01100110, 0b10110110, 0b00111110, 0b11100000, 0b11111110, 0b11100110, 0b00000000};
+    if (digit >= 0 && digit <= 10) {
         return segments[digit];
-    } else {
-        // Return 0xFF for an invalid digit (all segments off)
-        return 0xff;
     }
 }
 // Callback: timer has rolled over
@@ -750,9 +748,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		/* Start Multiplexing  */
 
 		HAL_GPIO_WritePin(GPIOB, latchPin, GPIO_PIN_RESET);	// pull latch pin HIGH
-//		for (int i = 0; i < 500; i++) {
-//
-//				}
+		for (int i = 0; i < 500; i++) {
+
+				}
 		uint8_t segment;
 		segment = TranslateDigit(segvalue[display_select]);
 		segment = ~segment;
@@ -768,20 +766,25 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		HAL_SPI_Transmit(&hspi1, tx_data, 3, 100);
 			// pull latch pin HIGH
 
-		if ((display_select > 3) && (hold < HOLDING_CYCLES)) {
-			hold++;
+//		if ((display_select > 3) && (hold < HOLDING_CYCLES)) {
+//			hold++;
+//		}
+//		else {
+//			display_select++;
+//			if (display_select == 8) {
+//			  display_select = 0;
+//			}
+//			hold = 0;
+//		}
+
+		for (int i = 0; i < 500; i++) {
+
 		}
-		else {
-			display_select++;
+
+		display_select++;
 			if (display_select == 8) {
 			  display_select = 0;
 			}
-			hold = 0;
-		}
-
-//		for (int i = 0; i < 500; i++) {
-//
-//		}
 		HAL_GPIO_WritePin(GPIOB, latchPin, GPIO_PIN_SET);
 	}
 

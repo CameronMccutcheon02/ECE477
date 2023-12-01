@@ -77,10 +77,10 @@ void Error_Handler(void);
 #define Test_Pin8_GPIO_Port GPIOB
 #define Test_Pin9_Pin GPIO_PIN_11
 #define Test_Pin9_GPIO_Port GPIOB
-#define IR_Sensor_IO1_Pin GPIO_PIN_6
+#define IR_Sensor_IO1_Pin GPIO_PIN_7
 #define IR_Sensor_IO1_GPIO_Port GPIOC
 #define IR_Sensor_IO1_EXTI_IRQn EXTI4_15_IRQn
-#define IR_Sensor_IO2_Pin GPIO_PIN_7
+#define IR_Sensor_IO2_Pin GPIO_PIN_6
 #define IR_Sensor_IO2_GPIO_Port GPIOC
 #define IR_Sensor_IO2_EXTI_IRQn EXTI4_15_IRQn
 #define Limit_SW1_Pin GPIO_PIN_9
