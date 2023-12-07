@@ -36,7 +36,8 @@ static void MX_SPI1_Init(void);
 
 /* Variable Declaration */
 uint8_t rxdata[4];					//buffer for data sent from PC/camera
-int target_ccr_acc = 250;//300; 			//target CCR value for TIM1 when accelerating (top speed)
+int target_ccr_acc = 200;//300; 			//target CCR value for TIM1 when accelerating (top speed)
+int target_ccr_acc_ud = 140;
 int target_ccr_dec = 450;//600;			//target CCR value for TIM1 when decelerating (lowest speed before stopping)
 int starting_ccr = 350; 			//initial CCR value for TIM1 (starting speed)
 int down_flag=0;
@@ -732,14 +733,32 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 	if (htim == &htim3)
 	{
-		/* Start Acceleration  */
+//		if(starting_ccr > target_ccr_acc)
+//		{
+//			starting_ccr = starting_ccr * .9;
+//			TIM1->CCR1 = (0.5) * starting_ccr;
+//			TIM1->CCR3 = (0.5) * starting_ccr;
+//			TIM1->ARR = starting_ccr;
+//		}
 
-		if(starting_ccr > target_ccr_acc)
-		{
-			starting_ccr = starting_ccr * .9;
-			TIM1->CCR1 = (0.5) * starting_ccr;
-			TIM1->CCR3 = (0.5) * starting_ccr;
-			TIM1->ARR = starting_ccr;
+		/* Start Acceleration  */
+		if((strstr(rxdata, "down") || (strstr(rxdata, "up00")))){
+			if(starting_ccr > target_ccr_acc_ud)
+			{
+				starting_ccr = starting_ccr * .9;
+				TIM1->CCR1 = (0.5) * starting_ccr;
+				TIM1->CCR3 = (0.5) * starting_ccr;
+				TIM1->ARR = starting_ccr;
+			}
+		}
+		else{
+			if(starting_ccr > target_ccr_acc)
+			{
+				starting_ccr = starting_ccr * .9;
+				TIM1->CCR1 = (0.5) * starting_ccr;
+				TIM1->CCR3 = (0.5) * starting_ccr;
+				TIM1->ARR = starting_ccr;
+			}
 		}
 	}
 
