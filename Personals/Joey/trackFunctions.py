@@ -57,10 +57,28 @@ def findObject(frame, low_color, high_color): #finds object of given color
             
 def findBounce(frame, velocity, puck, puckLine, step): #predicts location where puck will strike a wall and bounce towards
 
-    top = Line(0, (0, 30))
-    bottom = Line(0, (0, 440))
-    left = Line(999, (90, 0))
-    right = Line(999, (900, 0))
+    leftLimit = 80
+    rightLimit = 910
+    topLimit = 75#25
+    bottomLimit = 420#470
+
+
+    top = Line(0, (0, topLimit))
+    bottom = Line(0, (0, bottomLimit))
+    left = Line(999, (leftLimit, 0))
+    right = Line(999, (rightLimit, 0))
+
+    backLine = Line(999, (860, 0))
+
+    
+
+    prediction = puckLine.intersect(backLine)
+
+    if prediction[1] > topLimit and prediction[1] < bottomLimit and velocity[0] > 0:
+        cv2.circle(frame, prediction, 15, (0, 0, 255), -1)
+        #print(f'prediction: {prediction}')
+        return prediction
+
 
     if step == 0: #increase to see more collisions
         return
@@ -251,7 +269,7 @@ def shadow(ser, destination, currentPosition, prevInstruction):
         return 'stay'
         # print('stay')
 
-def move(ser, destination, currentPosition, prevInstruction):
+def move(ser, destination, currentPosition, prevInstruction, velocity, puckLine):
     #          up
     #          -
     #      ul  -    ur
@@ -307,17 +325,26 @@ def move(ser, destination, currentPosition, prevInstruction):
 
     #     # print('STOP')
     #     return
-    
-
-    
+       
 
     #if puck is on left side of table
     if destination[0] < 600:
+
+
+        #HAVE NOT FOUND GOOD WAY TO STOP ROBOT FROM DESTROYING ITSELF BECAUSE IT DOES NOT CONSTANTLY CHECK IF MALLET HAS REACHED PREDICTED LOCATION
+        #find prediction from findBounce, if not None: shadow(ser, prediction, currentPosition, prevInstruction)
+        # prediction = findBounce(None, velocity, destination, puckLine, 2)
+        # if not prediction:
+        #     #prevInstruction = shadow(ser, currentPosition, currentPosition, prevInstruction) #stay put
+        #     return prevInstruction
+        # else:
+        #     prevInstruction = shadow(ser, prediction, currentPosition, prevInstruction)
+        #     return prevInstruction
+            
+
         prevInstruction = shadow(ser, (860, destination[1]), currentPosition, prevInstruction)
         return prevInstruction
     
-
-
 
     distance = (destination[0] - currentPosition[0], destination[1] - currentPosition[1])
     x = distance[0]
@@ -380,3 +407,130 @@ def serial_write(ser, data):
     ser.write(data_to_send)
 
 
+def newMove(ser, destination, currentPosition, prevInstruction, velocity, puckLine):
+        #          up
+    #          -
+    #      ul  -    ur
+    # left-----0+++++++righ
+    #      dr  +    dr
+    #          +
+    #         down
+
+    leftLimit = 650 #700
+    rightLimit = 865 #835
+    topLimit = 75 #105
+    bottomLimit = 420 #380
+    sleepyTime = 0.5
+    
+    # #check to make sure mallet is not nearing left or right edge
+    # if currentPosition[0] not in range(leftLimit, rightLimit):
+    #     # serial_write(ser, '0')
+
+    #     if currentPosition[0] < leftLimit:
+    #         if prevInstruction == 'righ': return prevInstruction
+    #         serial_write(ser, 'righ')
+    #         time.sleep(sleepyTime)
+    #         return 'righ'
+            
+
+    #     if currentPosition[0] > rightLimit:
+    #         if prevInstruction == 'left': return prevInstruction
+    #         serial_write(ser, 'left')
+    #         time.sleep(sleepyTime)
+    #         return 'left'
+            
+
+    #     # print('STOP')
+    #     return
+    
+    # #check to make sure mallet is not nearing top or bottom edge
+    # if currentPosition[1] not in range(topLimit, bottomLimit):
+    #     # serial_write(ser, '0')
+
+    #     if currentPosition[1] < topLimit:
+    #         if prevInstruction == 'down': return prevInstruction
+    #         serial_write(ser, 'down')
+    #         time.sleep(sleepyTime)
+    #         return 'down'
+
+
+    #     if currentPosition[1] > bottomLimit:
+    #         if prevInstruction == 'up': return prevInstruction
+    #         serial_write(ser, 'up')
+    #         time.sleep(sleepyTime)
+    #         return 'up'
+
+
+    #     # print('STOP')
+    #     return
+       
+
+    #if puck is on left side of table
+    if destination[0] < 600:
+
+
+        #HAVE NOT FOUND GOOD WAY TO STOP ROBOT FROM DESTROYING ITSELF BECAUSE IT DOES NOT CONSTANTLY CHECK IF MALLET HAS REACHED PREDICTED LOCATION
+        #find prediction from findBounce, if not None: shadow(ser, prediction, currentPosition, prevInstruction)
+        # prediction = findBounce(None, velocity, destination, puckLine, 2)
+        # if not prediction:
+        #     #prevInstruction = shadow(ser, currentPosition, currentPosition, prevInstruction) #stay put
+        #     return prevInstruction
+        # else:
+        #     prevInstruction = shadow(ser, prediction, currentPosition, prevInstruction)
+        #     return prevInstruction
+            
+
+        prevInstruction = shadow(ser, (860, destination[1]), currentPosition, prevInstruction)
+        return prevInstruction
+    
+
+    distance = (destination[0] - currentPosition[0], destination[1] - currentPosition[1])
+    x = distance[0]
+    y = distance[1]
+    tolerance = 20
+
+    if x > tolerance and y > tolerance:
+        if prevInstruction == 'down': return prevInstruction
+        serial_write(ser, 'down')
+        return 'down'
+        # print('dr')
+    elif x > tolerance and y < -1*tolerance:
+        if prevInstruction == 'up': return prevInstruction
+        serial_write(ser, 'up')
+        return 'up'
+        # print('ur')
+    elif x < -1*tolerance and y > tolerance:
+        if prevInstruction == 'down': return prevInstruction
+        serial_write(ser, 'down')
+        return 'down'
+        # print('dl')
+    elif x < -1*tolerance and y < -1*tolerance:
+        if prevInstruction == 'up': return prevInstruction
+        serial_write(ser, 'up')
+        return 'up'
+        # print('ul')
+    elif y > tolerance and x < tolerance and x > -1*tolerance :
+        if prevInstruction == 'down': return prevInstruction
+        serial_write(ser, 'down')
+        return 'down'
+        # print('down')
+    elif y < -1*tolerance and x < tolerance and x > -1*tolerance:
+        if prevInstruction == 'up': return prevInstruction
+        serial_write(ser, 'up')
+        return 'up'
+        # print('up')
+    elif x > tolerance and y < tolerance and y > -1*tolerance:
+        if prevInstruction == 'righ': return prevInstruction
+        serial_write(ser, 'righ')
+        return 'righ'
+        # print('righ')
+    elif x < -1*tolerance and y < tolerance and y > -1*tolerance:
+        if prevInstruction == 'left': return prevInstruction
+        serial_write(ser, 'left')
+        return 'left'
+        # print('left')
+    else:
+        if prevInstruction == 'stay': return prevInstruction
+        serial_write(ser, 'stay')
+        return 'stay'
+        # print('stay')

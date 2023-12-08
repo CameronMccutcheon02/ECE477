@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import time
 from calibration import findRange
 from trackFunctions import *
 import serial
@@ -38,28 +37,17 @@ if __name__ == '__main__':
 
         frame = cv2.resize(frame, (960, 540))
 
-        # leftLimit = 650 #700
-        # rightLimit = 865 #835
-        # topLimit = 75 #105
-        # bottomLimit = 420 #380
-
-        # cv2.line(frame, (leftLimit, topLimit), (leftLimit, bottomLimit), (255, 0, 0), 10)
-        # cv2.line(frame, (rightLimit, topLimit), (rightLimit, bottomLimit), (255, 0, 0), 10)
-        # cv2.line(frame, (leftLimit, topLimit), (rightLimit, topLimit), (255, 0, 0), 10)
-        # cv2.line(frame, (leftLimit, bottomLimit), (rightLimit, bottomLimit), (255, 0, 0), 10)
-
-        # cv2.line(frame, (600, 0), (600, 500), (255, 0, 0), 5)
-
-
+        leftLimit = 80 #700
+        rightLimit = 910 #835
+        topLimit = 25 #105
+        bottomLimit = 470 #380
                
         puck_location = findObject(frame, low_puck, high_puck)
         if not puck_location: puck_location = old_puck_location
+        # if not puck_location: puck_location = (250, 250)
 
         mallet_location = findObject(frame, low_mallet, high_mallet)
         if not mallet_location: mallet_location = old_mallet_location
-
-
-        prevInstruction = move(ser, puck_location, mallet_location, prevInstruction)
 
 
         # Compute velocity and prediction based off of previous frame
@@ -72,25 +60,15 @@ if __name__ == '__main__':
         slope = int(velocity[1]/(velocity[0]+1e-5))
         puckLine = Line(slope, puck_location) #defines line on which puck is traveling
 
-        #findBounce(frame, velocity, puck_location, puckLine, 2)
-            
-        # cv2.circle(frame, (90, 440), 15, (0, 255, 0), -1)
-        # cv2.circle(frame, (900, 30), 15, (0, 255, 0), -1)
-        # cv2.circle(frame, (900, 440), 15, (0, 255, 0), -1)
-        # cv2.circle(frame, (90, 30), 15, (0, 255, 0), -1)
+        prevInstruction = move(ser, puck_location, mallet_location, prevInstruction, velocity, puckLine)
+        # prevInstruction = newMove(ser, puck_location, mallet_location, prevInstruction, velocity, puckLine)
 
-        #cv2.circle(frame, (820, 245), 15, (0, 255, 0), -1)
-
-        # cv2.line(frame, (650, 450), (650, 35), (255, 0, 0), 5) #left
-        # cv2.line(frame, (850, 55), (650, 35), (255, 0, 0), 5) #top
-        # cv2.line(frame, (650, 450), (850, 430), (255, 0, 0), 5) #bottom
-        # cv2.line(frame, (850, 55), (850, 430), (255, 0, 0), 5) #right
                 
         cv2.imshow('Frame', frame)
 
 
         if cv2.waitKey(1) == 27:
-            # serial_write(ser, '0')
+            serial_write(ser, '0')
             break
 
     vid.release()
